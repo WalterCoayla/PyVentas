@@ -7,6 +7,7 @@
     <title>Ventas</title>
 </head>
 <body>
-    <h1><?=$titulo?></h1>
+    <h1>Bienvenido</h1>
+
 </body>
 </html>
