@@ -21,9 +21,9 @@
       <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Buscar" aria-label="Search">
+          <input id="txtBuscar" class="form-control form-control-sidebar" type="search" placeholder="Buscar" aria-label="Search">
           <div class="input-group-append">
-            <button class="btn btn-sidebar">
+            <button class="btn btn-sidebar" id="btnBuscar">
               <i class="fas fa-search fa-fw"></i>
             </button>
           </div>
@@ -40,7 +40,7 @@
               <p>
                 <?=$valor?>
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
+                <span class="badge badge-info right">1</span>
               </p>
             </a>
           </li>

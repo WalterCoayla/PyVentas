@@ -2,14 +2,15 @@
 <section class="content">
     <div class="container-fluid">
 
-    <a href="?ctrl=CtrlPais&accion=nuevo" class="btn btn-primary">
+    <a href="?ctrl=CtrlCiudad&accion=nuevo" class="btn btn-primary">
         <i class="bi bi-plus-circle"></i> 
-        Insertar Nuevo Pais</a>
+        Insertar Nueva Ciudad</a>
     <br><br>
     <table class="table table-head-fixed text-nowrap">
         <thead>
           <tr>
             <th>Id</th>
+            <th>Ciudad</th>
             <th>Pais</th>
             <th>Operaciones</th>
           </tr>  
@@ -19,13 +20,14 @@
     if (is_array($data))
         foreach ($data as $c) { ?>
             <tr>
-                <td><?=$c["idpais"]?></td>
-                <td><?=$c["nombre"]?></td>
+                <td><?=$c["idciudad"]?></td>
+                <td><?=$c["ciudad"]?></td>
+                <td><?=$c["pais"]?></td>
                 <td>
-                <a href="?ctrl=CtrlPais&accion=editar&id=<?=$c["idpais"]?>">
+                <a href="?ctrl=CtrlCiudad&accion=editar&id=<?=$c["idciudad"]?>">
                     <i class="bi bi-pencil-square"></i> Editar </a>
                 / 
-                <a href="?ctrl=CtrlPais&accion=eliminar&id=<?=$c["idpais"]?>">
+                <a href="?ctrl=CtrlCiudad&accion=eliminar&id=<?=$c["idciudad"]?>">
                     <i class="bi bi-trash"></i> Eliminar </a>
                 </td>
             </tr>

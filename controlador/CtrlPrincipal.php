@@ -1,15 +1,13 @@
 <?php
 require_once SYS . DIRECTORY_SEPARATOR . 'Controlador.php';
-
+require_once REC . DIRECTORY_SEPARATOR . 'Libreria.php';
 /*
 * Clase CtrlPrincipal
 */
 class CtrlPrincipal extends Controlador {
     
     public function index(){
-        $menu= array(
-            'CtrlPais'=>'Paises',
-        );
+        $menu= Libreria::getMenu();
         $migas = array(
             '?'=>'Inicio',
         );

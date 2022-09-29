@@ -18,3 +18,6 @@ define('MOD', APP . DIRECTORY_SEPARATOR . 'modelo');
 define('CON', APP . DIRECTORY_SEPARATOR . 'controlador');
 
 define('PER', APP . DIRECTORY_SEPARATOR . 'persistencia');
+
+/* recursos */
+define('REC', APP . DIRECTORY_SEPARATOR . 'recursos');

@@ -16,5 +16,6 @@
     <?php echo $contenido; ?>
   </div>
     <?php echo Vista::mostrar('./plantilla/footer.php',$datos,true); ?>
+    <?php echo Vista::mostrar('./plantilla/js.php',$datos,true); ?>
 </body>
 </html>
