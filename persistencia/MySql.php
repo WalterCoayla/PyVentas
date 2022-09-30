@@ -19,19 +19,36 @@ class MySQL implements ManejadorBDInterface {
         mysqli_close($this->_conexion);
     }
     public function traerDatos($sql){
-        $retorno = null; $msg=null; $data=null; $sentencia=null;
+        $retorno = null; 
+        $msg=array(
+            'titulo'=>'',
+            'cuerpo'=>''
+        ); 
+        $data=null; $sentencia=null;
         $sentencia= explode(" ", $sql);
         $sentencia= strtoupper($sentencia[0]); #Primera PALABRA del comando
         if (!($resultado = $this->_conexion->query($sql)))
             $retorno= array(
                 'data'=>null,
-                'msg'=> 'Error!! En la Sentencia SQL: '.$sql);
+                'msg'=> array(
+                        'titulo'=>'Error',
+                        'cuerpo'=>'En la Sentencia SQL: '.$sql));
         else{
             if (is_object($resultado)){ #Si devuelve un SELECT
-                while ($row = mysqli_fetch_assoc($resultado)) 
-                    $data[] = $row;
+                // var_dump($resultado);exit();
+                if($resultado->num_rows==0){
+                    $data=null;
+                    $msg= array(
+                            'titulo'=>$sentencia,
+                            'cuerpo'=>"No se Encontraron Datos")
+                        ;
+                } else
+                    while ($row = mysqli_fetch_assoc($resultado)) 
+                        $data[] = $row;
             } else # En caso de otra operación (INSERT/UPDATE/DELETE)
-                $msg = $sentencia . " realizado correctamente";
+                $msg = array(
+                        'titulo'=>$sentencia,
+                        'cuerpo'=>" Sentencia realizada correctamente");
             $retorno= array(
                     'data'=>$data,
                     'msg'=> $msg

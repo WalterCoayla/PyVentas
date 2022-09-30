@@ -28,7 +28,9 @@ class CtrlCiudad extends Controlador {
     }
     public function nuevo(){
         $menu = Libreria::getMenu();
-        // $msg='';
+        $msg= array(
+            'titulo'=>'Nuevo...',
+            'cuerpo'=>'Ingrese información para nueva Ciudad');
         $migas = array(
             '?'=>'Inicio',
             '?ctrl=CtrlCiudad'=>'Listado',
@@ -45,7 +47,7 @@ class CtrlCiudad extends Controlador {
                 'contenido'=>Vista::mostrar('ciudad/frmNuevo.php',$datos1,true),
                 'menu'=>$menu,
                 'migas'=>$migas,
-                'msg'=>''
+                'msg'=>$msg
             );
         $this->mostrarVista('template.php',$datos);
     }
@@ -72,7 +74,9 @@ class CtrlCiudad extends Controlador {
     public function editar(){
         #Mostramos el Formulario de Editar
         $menu = Libreria::getMenu();
-        $msg='Editando...';
+        $msg= array(
+            'titulo'=>'Editando...',
+            'cuerpo'=>'Iniciando edición para: '.$_REQUEST['id']);
         $migas = array(
             '?'=>'Inicio',
             '?ctrl=CtrlCiudad'=>'Listado',
@@ -80,26 +84,37 @@ class CtrlCiudad extends Controlador {
         );
         if (isset($_REQUEST['id'])) {
             $obj = new Ciudad($_REQUEST['id']);
-            $obj->leerUno();
-
-            $datos1 = array(
-                    'ciudad'=>$obj
+            $miObj = $obj->leerUno();
+            if (is_null($miObj['data'])) {
+                $this->index(array(
+                    'titulo'=>'Error',
+                    'cuerpo'=>'ID Requerido: '.$_REQUEST['id']. ' No Existe')
                 );
+            }else{
 
-            $datos = array(
-                'titulo'=>'Editando Ciudad: '. $_REQUEST['id'],
-                'contenido'=>Vista::mostrar('ciudad/frmEditar.php',$datos1,true),
-                'menu'=>$menu,
-                'migas'=>$migas,
-                'msg'=>$msg
-            );
+                $datos1 = array(
+                        'ciudad'=>$obj
+                    );
+
+                $datos = array(
+                    'titulo'=>'Editando Ciudad: '. $_REQUEST['id'],
+                    'contenido'=>Vista::mostrar('ciudad/frmEditar.php',$datos1,true),
+                    'menu'=>$menu,
+                    'migas'=>$migas,
+                    'msg'=>$msg
+                );
+            }
         }else {
+            $msg= array(
+            'titulo'=>'Error',
+            'cuerpo'=>'No se encontró al ID requerido');
+
             $datos = array(
                 'titulo'=>'Editando Ciudad... DESCONOCIDO',
                 'contenido'=>'...El Id a Editar es requerido',
                 'menu'=>$menu,
                 'migas'=>$migas,
-                'msg'=>'Error!!!');
+                'msg'=>$msg);
         }
         
         $this->mostrarVista('template.php',$datos);
@@ -110,7 +125,7 @@ class CtrlCiudad extends Controlador {
         $obj = new Ciudad (
                 $_POST["id"],    #El id que enviamos
                 $_POST["ciudad"],
-                $_POST["pais"],
+                $_POST["pais"]
                 );
         $respuesta=$obj->editar();
         

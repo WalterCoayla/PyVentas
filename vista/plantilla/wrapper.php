@@ -11,10 +11,14 @@
             <ol class="breadcrumb float-sm-right">
               <?php 
                 foreach ($migas as $key => $value) {
-                ?>
-              <li class="breadcrumb-item"><a href="<?=$key?>"><?=$value?></a></li>
-
-              <?php  }
+                  if($key!="#"){ ?>
+                  <li class="breadcrumb-item"><a href="<?=$key?>"><?=$value?></a></li>
+                <?php  }else{
+                  ?>
+                  <li class="breadcrumb-item"><?=$value?></li>
+                <?php
+                }
+                  }
               ?>
             </ol>
           </div><!-- /.col -->

@@ -32,10 +32,12 @@ class Ciudad extends Modelo {
         
         $datos= $this->_bd->ejecutar($sql);  
         // var_dump($datos);exit();
-        $this->_id = $datos['data'][0]["idciudad"];
-        $this->_nombre = $datos['data'][0]["ciudad"];
-        $this->_pais = new Pais ($datos['data'][0]["idpais"]);
-
+        if (is_array($datos['data'])){
+            $this->_id = $datos['data'][0]["idciudad"];
+            $this->_nombre = $datos['data'][0]["ciudad"];
+            $this->_pais = new Pais ($datos['data'][0]["idpais"]);
+        }
+    
         return $datos; 
     }
     public function eliminar(){

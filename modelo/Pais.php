@@ -23,9 +23,11 @@ class Pais extends Modelo {
         
         $datos= $this->_bd->ejecutar($sql);  
         //var_dump($datos);exit();
-        $this->_id = $datos['data'][0]["idpais"];
-        $this->_nombre = $datos['data'][0]["nombre"];
-
+        if (is_array($datos['data'])){
+            $this->_id = $datos['data'][0]["idpais"];
+            $this->_nombre = $datos['data'][0]["nombre"];  
+        }
+        
         return $datos; 
     }
     public function eliminar(){

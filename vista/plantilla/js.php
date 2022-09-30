@@ -3,17 +3,23 @@
 <script src="recursos/js/jq-toast.min.js"></script>
 <script type="text/javascript">
     $(function () {
-
-        var myToast = $.toast({
-            heading: 'Mensaje',
-            text: '<?=$msg?>',
-            icon: 'success',
-            position: 'top-right',
-            showHideTransition: 'plain',
-        // bgColor: 'green',
-            textColor: 'white',
-            hideAfter: 2000
-        });
+        let msg='<?=$msg['titulo']?>';
+        if(msg==''){
+            
+        }else{
+            let icono = (msg=='Error')?'error':'success';
+            var myToast = $.toast({
+                heading: msg,
+                text: '<?=$msg['cuerpo']?>',
+                icon: icono,
+                position: 'top-right',
+                showHideTransition: 'plain',
+                // bgColor: 'green',
+                    textColor: 'white',
+                    hideAfter: 2000
+            });
+        }
+        
 
         $("#btnBuscar").click(function (e) { 
             e.preventDefault();

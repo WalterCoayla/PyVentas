@@ -33,12 +33,12 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <?php foreach ($menu as $key => $valor) { ?>
+          <?php foreach ($menu as $m) { ?>
           <li class="nav-item">
-            <a href="<?='?ctrl='.$key?>" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+            <a href="<?='?ctrl='.$m['enlace']?>" class="nav-link">
+              <i class="nav-icon fas fa-<?=$m['icono']?>"></i>
               <p>
-                <?=$valor?>
+                <?=$m['texto']?>
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">1</span>
               </p>
