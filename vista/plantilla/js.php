@@ -1,14 +1,20 @@
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="recursos/js/jq-toast.min.js"></script>
+<?php 
+
+foreach ($jsGbl as $c) { ?>
+  <script src="<?=$c['url']?>"></script>
+<?php }
+?>
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+
 <script type="text/javascript">
     $(function () {
         let msg='<?=$msg['titulo']?>';
-        if(msg==''){
-            
-        }else{
+        if(msg!=''){
             let icono = (msg=='Error')?'error':'success';
-            var myToast = $.toast({
+            $.toast({
                 heading: msg,
                 text: '<?=$msg['cuerpo']?>',
                 icon: icono,
@@ -18,7 +24,7 @@
                     textColor: 'white',
                     hideAfter: 2000
             });
-        }
+        };
         
 
         $("#btnBuscar").click(function (e) { 

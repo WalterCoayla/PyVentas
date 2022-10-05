@@ -7,7 +7,7 @@ require_once REC . DIRECTORY_SEPARATOR . 'Libreria.php';
 */
 class CtrlCiudad extends Controlador {
     
-    public function index($msg=''){
+    public function index($msg=array('titulo'=>'','cuerpo'=>'')){
         $menu= Libreria::getMenu();
         $migas = array(
             '?'=>'Inicio',

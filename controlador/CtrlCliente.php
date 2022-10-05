@@ -1,25 +1,24 @@
 <?php
 require_once SYS . DIRECTORY_SEPARATOR . 'Controlador.php';
-require_once MOD .DIRECTORY_SEPARATOR . 'Pais.php';
+require_once MOD .DIRECTORY_SEPARATOR . 'Cliente.php';
 require_once REC . DIRECTORY_SEPARATOR . 'Libreria.php';
 /*
-* Clase CtrlPais
+* Clase CtrlCliente
 */
-class CtrlPais extends Controlador {
+class CtrlCliente extends Controlador {
     
     public function index($msg=array('titulo'=>'','cuerpo'=>'')){
         $menu= Libreria::getMenu();
         $migas = array(
             '?'=>'Inicio',
-            '#'=>'Listado'
         );
 
-        $obj = new Pais();
+        $obj = new Cliente();
         $resultado = $obj->leer();
 
         $datos = array(
-            'titulo'=>"Paises",
-            'contenido'=>Vista::mostrar('pais/mostrar.php',$resultado,true),
+            'titulo'=>"Clientes",
+            'contenido'=>Vista::mostrar('cliente/mostrar.php',$resultado,true),
             'menu'=>$menu,
             'migas'=>$migas,
             'msg'=>$msg
@@ -31,19 +30,21 @@ class CtrlPais extends Controlador {
         $menu = Libreria::getMenu();
         $msg= array(
             'titulo'=>'Nuevo...',
-            'cuerpo'=>'Ingrese información para nuevo Pais');
+            'cuerpo'=>'Ingrese información para nueva Cliente');
         $migas = array(
             '?'=>'Inicio',
-            '?ctrl=CtrlPais'=>'Listado',
-            '#'=>'Nuevo'
+            '?ctrl=CtrlCliente'=>'Listado',
+            '#'=>'Nuevo',
         );
+        $obj = new Cliente();
         $datos1=array(
-            'encabezado'=>'Nuevo Pais'
+            'encabezado'=>'Nueva Cliente',
+            'cliente'=>$obj
             );
 
         $datos = array(
-                'titulo'=>'Nuevo Pais',
-                'contenido'=>Vista::mostrar('pais/frmNuevo.php',$datos1,true),
+                'titulo'=>'Nueva Cliente',
+                'contenido'=>Vista::mostrar('cliente/frmNuevo.php',$datos1,true),
                 'menu'=>$menu,
                 'migas'=>$migas,
                 'msg'=>$msg
@@ -52,8 +53,9 @@ class CtrlPais extends Controlador {
     }
 
     public function guardarNuevo(){
-        $obj = new Pais (
+        $obj = new Cliente (
                 $_POST["id"],
+                $_POST["Cliente"],
                 $_POST["pais"],
                 );
         $respuesta=$obj->nuevo();
@@ -62,7 +64,7 @@ class CtrlPais extends Controlador {
     }
     public function eliminar(){
         if (isset($_REQUEST['id'])) {
-            $obj = new Pais($_REQUEST['id']);
+            $obj = new Cliente($_REQUEST['id']);
             $resultado=$obj->eliminar();
             $this->index($resultado['msg']);
         } else {
@@ -71,45 +73,44 @@ class CtrlPais extends Controlador {
     }
     public function editar(){
         #Mostramos el Formulario de Editar
-        $datos=null;
         $menu = Libreria::getMenu();
         $msg= array(
             'titulo'=>'Editando...',
-            'cuerpo'=>'Iniciando edición de: '.$_REQUEST['id']);
+            'cuerpo'=>'Iniciando edición para: '.$_REQUEST['id']);
         $migas = array(
             '?'=>'Inicio',
-            '?ctrl=CtrlPais'=>'Listado',
+            '?ctrl=CtrlCliente'=>'Listado',
             '#'=>'Editar',
         );
         if (isset($_REQUEST['id'])) {
-            $obj = new Pais($_REQUEST['id']);
+            $obj = new Cliente($_REQUEST['id']);
             $miObj = $obj->leerUno();
-            // var_dump($obj->leerUno());exit();
             if (is_null($miObj['data'])) {
                 $this->index(array(
                     'titulo'=>'Error',
                     'cuerpo'=>'ID Requerido: '.$_REQUEST['id']. ' No Existe')
                 );
             }else{
+
                 $datos1 = array(
-                    'pais'=>$obj
+                        'cliente'=>$obj
+                    );
+
+                $datos = array(
+                    'titulo'=>'Editando Cliente: '. $_REQUEST['id'],
+                    'contenido'=>Vista::mostrar('cliente/frmEditar.php',$datos1,true),
+                    'menu'=>$menu,
+                    'migas'=>$migas,
+                    'msg'=>$msg
                 );
-            $datos = array(
-                'titulo'=>'Editando Pais: '. $_REQUEST['id'],
-                'contenido'=>Vista::mostrar('pais/frmEditar.php',$datos1,true),
-                'menu'=>$menu,
-                'migas'=>$migas,
-                'msg'=>$msg
-            );
             }
-            
         }else {
             $msg= array(
             'titulo'=>'Error',
             'cuerpo'=>'No se encontró al ID requerido');
 
             $datos = array(
-                'titulo'=>'Editando Turno... DESCONOCIDO',
+                'titulo'=>'Editando Cliente... DESCONOCIDO',
                 'contenido'=>'...El Id a Editar es requerido',
                 'menu'=>$menu,
                 'migas'=>$migas,
@@ -121,21 +122,13 @@ class CtrlPais extends Controlador {
         
     }
     public function guardarEditar(){
-        $obj = new Pais (
+        $obj = new Cliente (
                 $_POST["id"],    #El id que enviamos
+                $_POST["ciudad"],
                 $_POST["pais"]
                 );
         $respuesta=$obj->editar();
         
         $this->index($respuesta['msg']);
-    }
-    public function getPaisesSelect(){
-        $obj = new Pais();
-        $datos = $obj->leer()['data'];
-        $html = '<option value="0">Seleccionar...</option>';
-        foreach ($datos as $d) {
-            $html .= '<option value="'.$d['idpais'].'">'.$d['nombre'].'</option>';
-        }
-        echo $html;
     }
 }

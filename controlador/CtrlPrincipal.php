@@ -16,7 +16,10 @@ class CtrlPrincipal extends Controlador {
             'contenido'=>Vista::mostrar('principal.php','',true),
             'menu'=>$menu,
             'migas'=>$migas,
-            'msg'=>''
+            'msg'=>array(
+                    'titulo'=>'',
+                    'cuerpo'=>''
+                )
         );
         
         $this->mostrarVista('template.php',$datos);

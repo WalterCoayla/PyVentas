@@ -1,3 +1,13 @@
+<?php 
+ $dataCSS =
+      array ('cssGbl'=> Libreria::cssGlobales()
+    );
+    $dataJS = 
+      array('jsGbl'=>Libreria::jsGlobales(),
+          'msg'=>$datos['msg']);
+  //echo "aqyi";
+  //  var_dump($datos);exit();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=$titulo?></title>
-    <?php echo Vista::mostrar('./plantilla/css.php',$datos,true); ?>
+    <?php echo Vista::mostrar('./plantilla/css.php',$dataCSS,true); ?>
 </head>
 <body>
     <?php echo Vista::mostrar('./plantilla/nav.php',$datos,true); ?>
@@ -16,6 +26,6 @@
     <?php echo $contenido; ?>
   </div>
     <?php echo Vista::mostrar('./plantilla/footer.php',$datos,true); ?>
-    <?php echo Vista::mostrar('./plantilla/js.php',$datos,true); ?>
+    <?php echo Vista::mostrar('./plantilla/js.php',$dataJS,true); ?>
 </body>
 </html>
