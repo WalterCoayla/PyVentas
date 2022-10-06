@@ -11,12 +11,13 @@ $(function () {
     $("#pais").on('change', function () {
         $("#pais option:selected").each(function () {
             elegido = $(this).val();
-            // alert("Selecionado: " + elegido);
             $.ajax({
                 method: "GET",
                 url: "index.php?ctrl=CtrlCiudad&accion=getCiudadesSelect",
                 data: { id: elegido }
-            })
+            }).done(function (data) {
+                $("#ciudad").html(data);
+            });
         });
     });
         

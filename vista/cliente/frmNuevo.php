@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-6">
             <label for="inputPais" class="form-label">Cidad:</label>
-            <select class="form-control" name="ciudad" id="pais">
+            <select class="form-control" name="ciudad" id="ciudad">
                 <option value="0">Seleccionar</option>
 
             </select>
@@ -50,19 +50,3 @@
         Retornar</a>
 </div>
 </section>
-
-<script>
-    $(function () {
-        console.log('Cargando paises');
-        $.ajax({
-            method: "GET",
-            url: "index.php?ctrl=CtrlPais&accion=getPaisesSelect",
-            data: { }
-        })
-            .done(function (data) {
-                $("#pais").html(data);
-            });
-
-
-    });
-</script>

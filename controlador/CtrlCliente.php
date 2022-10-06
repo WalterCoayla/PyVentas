@@ -51,11 +51,13 @@ class CtrlCliente extends Controlador {
     public function guardarNuevo(){
         $obj = new Cliente (
                 $_POST["id"],
-                $_POST["Cliente"],
-                $_POST["pais"],
+                $_POST["nombre"],
+                $_POST["apellido"],
+                $_POST["dni"],
+                $_POST["ciudad"]
                 );
         $respuesta=$obj->nuevo();
-
+        // var_dump($respuesta);exit();
         $this->index($respuesta['msg']);
     }
     public function eliminar(){
@@ -70,7 +72,11 @@ class CtrlCliente extends Controlador {
     public function editar(){
         #Mostramos el Formulario de Editar
         $menu = Libreria::getMenu();
-        
+        $jsVista = array(
+                array(
+                'url'=>'recursos/js/jsPais.js'
+                )
+            );
         if (isset($_REQUEST['id'])) {
             $obj = new Cliente($_REQUEST['id']);
             $miObj = $obj->leerUno();
@@ -88,7 +94,8 @@ class CtrlCliente extends Controlador {
                     'contenido'=>Vista::mostrar('cliente/frmEditar.php',$datos1,true),
                     'menu'=>$menu,
                     'migas'=>$this->_getMigas('editar'),
-                    'msg'=>$this->_getMsg('Editando...','Iniciando edición para: '.$_REQUEST['id'])
+                    'msg'=>$this->_getMsg('Editando...','Iniciando edición para: '.$_REQUEST['id']),
+                    'js'=>$jsVista
                 );
             }
         }else {
@@ -105,9 +112,11 @@ class CtrlCliente extends Controlador {
     }
     public function guardarEditar(){
         $obj = new Cliente (
-                $_POST["id"],    #El id que enviamos
-                $_POST["ciudad"],
-                $_POST["pais"]
+                $_POST["id"],
+                $_POST["nombre"],
+                $_POST["apellido"],
+                $_POST["dni"],
+                $_POST["ciudad"]
                 );
         $respuesta=$obj->editar();
         

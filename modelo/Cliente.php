@@ -18,6 +18,7 @@ class Cliente extends Modelo {
         $this->_id = $id;
         $this->_nombre= $nombre;
         $this->_apellido= $apellido;
+        $this->_dni= $dni;
         $this->_ciudad= new Ciudad($ciudad);
     }
     public function setCiudad (Ciudad $p){
@@ -38,7 +39,8 @@ class Cliente extends Modelo {
         // var_dump($datos);exit();
         if (is_array($datos['data'])){
             $this->_id = $datos['data'][0]["idcliente"];
-            $this->_nombre = $datos['data'][0]["nombrecliente"];
+            $this->_nombre = $datos['data'][0]["nombres"];
+            $this->_apellido = $datos['data'][0]["apellidos"];
             $this->_dni = $datos['data'][0]["dni"];
             $this->_ciudad = new Ciudad ($datos['data'][0]["idciudad"]);
         }
@@ -53,9 +55,9 @@ class Cliente extends Modelo {
     public function editar(){
         $sql ="UPDATE ". $this->_tabla 
             . " SET nombres='".$this->_nombre."',"
-            . " apellidos='".$this->_apellido ."'"
-            . " dni='".$this->_dni ."'"
-            . " idpais='".$this->_ciudad->getId() ."'"
+            . " apellidos='".$this->_apellido ."',"
+            . " dni='".$this->_dni ."',"
+            . " idciudad=".$this->_ciudad->getId() 
             ." WHERE idcliente=".$this->_id;
         // var_dump($sql); exit();
         return $this->_bd->ejecutar($sql);
@@ -63,10 +65,10 @@ class Cliente extends Modelo {
 
     public function nuevo(){
         $sql = "INSERT INTO ". $this->_tabla 
-            ." (idcliente, nombre,apellido, dni, idciudad) VALUES (".
+            ." (idcliente, nombres,apellidos, dni, idciudad) VALUES (".
                 $this->_id .",'"
-                . $this->_nombre ."',"
-                . $this->_apellido ."',"
+                . $this->_nombre ."','"
+                . $this->_apellido ."','"
                 . $this->_dni ."',"
                 . $this->_ciudad->getId()
             .");";
