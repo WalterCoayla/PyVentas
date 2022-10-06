@@ -26,6 +26,11 @@ class Ciudad extends Modelo {
         $sql ="SELECT * FROM ". $this->_vista .";";
         return $this->_bd->ejecutar($sql);
     }
+    public function leerXPais($id){
+        $sql ="SELECT * FROM ". $this->_tabla
+            . " WHERE idpais=".$id;
+        return $this->_bd->ejecutar($sql);
+    }
      public function leerUno(){
         $sql= "SELECT * FROM ". $this->_vista 
             . " WHERE idciudad=".$this->_id;

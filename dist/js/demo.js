@@ -14,7 +14,7 @@
     if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {
       localStorage.setItem('AdminLTE:Demo:MessageShowed', (Date.now()) + (15 * 60 * 1000))
       // eslint-disable-next-line no-alert
-      alert('You load AdminLTE\'s "demo.js", \nthis file is only created for testing purposes!')
+      alert('Cargaste AdminLTE\'s "demo.js", \neste archivo solamente fue creado con propósitos de testeo!')
     }
   }, 1000)
 
@@ -60,7 +60,7 @@
   // Checkboxes
 
   $container.append(
-    '<h5>Customize AdminLTE</h5><hr class="mb-2"/>'
+    '<h5>Personalizar ...</h5><hr class="mb-2"/>'
   )
 
   var $dark_mode_checkbox = $('<input />', {
@@ -75,7 +75,7 @@
       $('body').removeClass('dark-mode')
     }
   })
-  var $dark_mode_container = $('<div />', { class: 'mb-4' }).append($dark_mode_checkbox).append('<span>Dark Mode</span>')
+  var $dark_mode_container = $('<div />', { class: 'mb-4' }).append($dark_mode_checkbox).append('<span>Modo Oscuro</span>')
   $container.append($dark_mode_container)
 
   $container.append('<h6>Header Options</h6>')

@@ -26,10 +26,7 @@ abstract class Libreria {
                     'nombre'=>'Google Font: Source Sans Pro',
                     'url'=>'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback'
                 ),
-                array(
-                    'nombre'=>'Google Font: Source Sans Pro',
-                    'url'=>'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback'
-                ),
+                
                 array(
                     'nombre'=>'Font Awesome',
                     'url'=>'plugins/fontawesome-free/css/all.min.css'
@@ -76,7 +73,7 @@ abstract class Libreria {
     static function jsGlobales(){
         return array(
             array(
-                'url'=>'https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js'
+                'url'=>'plugins/jquery/jquery.min.js'
             ),
             array(
                 'url'=>'plugins/jquery-ui/jquery-ui.min.js'
@@ -86,6 +83,12 @@ abstract class Libreria {
             ),
             array(
                 'url'=>'dist/js/adminlte.js'
+            ),
+            array(
+                'url'=>'dist/js/demo.js'
+            ),
+            array(
+                'url'=>'dist/js/pages/dashboard3.js'
             ),
             array(
                 'url'=>'recursos/js/jq-toast.min.js'

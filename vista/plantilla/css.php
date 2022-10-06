@@ -1,7 +1,8 @@
 <?php 
 
 foreach ($cssGbl as $c) { ?>
- <!-- <?=$c['nombre']?> -->
+
+<!-- <?=$c['nombre']?> -->
   <link rel="stylesheet" href="<?=$c['url']?>">
 <?php }
 ?>

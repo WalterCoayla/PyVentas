@@ -131,4 +131,15 @@ class CtrlCiudad extends Controlador {
         
         $this->index($respuesta['msg']);
     }
+    public function getCiudadesSelect(){
+        $id = $_GET['id'];
+        $obj = new Ciudad();
+        $datos = $obj->leerXPais($id)['data'];
+        $html = '<option value="0">Seleccionar...</option>';
+        foreach ($datos as $d) {
+            $html .= '<option value="'.$d['idciudad'].'">'.$d['nombre'].'</option>';
+        }
+        echo $html;
+
+    }
 }

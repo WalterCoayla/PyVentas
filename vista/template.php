@@ -5,8 +5,6 @@
     $dataJS = 
       array('jsGbl'=>Libreria::jsGlobales(),
           'msg'=>$datos['msg']);
-  //echo "aqyi";
-  //  var_dump($datos);exit();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +23,18 @@
     <?php echo Vista::mostrar('./plantilla/wrapper.php',$datos,true); ?>
     <?php echo $contenido; ?>
   </div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
     <?php echo Vista::mostrar('./plantilla/footer.php',$datos,true); ?>
-    <?php echo Vista::mostrar('./plantilla/js.php',$dataJS,true); ?>
+    <?php echo Vista::mostrar('./plantilla/js.php',$dataJS,true); 
+    
+    // var_dump($js);exit();
+    if (isset($js))
+      foreach ($js as $j) { ?>
+        <script src="<?=$j['url']?>"></script>
+     <?php }
+    ?>
 </body>
 </html>

@@ -2,7 +2,8 @@
 <?php 
 
 foreach ($jsGbl as $c) { ?>
-  <script src="<?=$c['url']?>"></script>
+
+<script src="<?=$c['url']?>"></script>
 <?php }
 ?>
 <script>
