@@ -8,6 +8,10 @@ require_once REC . DIRECTORY_SEPARATOR . 'Libreria.php';
 class CtrlPais extends Controlador {
     
     public function index($msg=array('titulo'=>'','cuerpo'=>'')){
+        if(!isset($_SESSION['nombre'])){
+            header("Location: ?");
+            exit();
+        }
         $menu= Libreria::getMenu();
         $migas = array(
             '?'=>'Inicio',
@@ -28,6 +32,10 @@ class CtrlPais extends Controlador {
         $this->mostrarVista('template.php',$datos);
     }
     public function nuevo(){
+        if(!isset($_SESSION['nombre'])){
+            header("Location: ?");
+            exit();
+        }
         $menu = Libreria::getMenu();
         $msg= array(
             'titulo'=>'Nuevo...',
@@ -52,6 +60,10 @@ class CtrlPais extends Controlador {
     }
 
     public function guardarNuevo(){
+        if(!isset($_SESSION['nombre'])){
+            header("Location: ?");
+            exit();
+        }
         $obj = new Pais (
                 $_POST["id"],
                 $_POST["pais"],
@@ -61,6 +73,10 @@ class CtrlPais extends Controlador {
         $this->index($respuesta['msg']);
     }
     public function eliminar(){
+        if(!isset($_SESSION['nombre'])){
+            header("Location: ?");
+            exit();
+        }
         if (isset($_REQUEST['id'])) {
             $obj = new Pais($_REQUEST['id']);
             $resultado=$obj->eliminar();
@@ -70,6 +86,10 @@ class CtrlPais extends Controlador {
         }
     }
     public function editar(){
+        if(!isset($_SESSION['nombre'])){
+            header("Location: ?");
+            exit();
+        }
         #Mostramos el Formulario de Editar
         $datos=null;
         $menu = Libreria::getMenu();
@@ -121,6 +141,10 @@ class CtrlPais extends Controlador {
         
     }
     public function guardarEditar(){
+        if(!isset($_SESSION['nombre'])){
+            header("Location: ?");
+            exit();
+        }
         $obj = new Pais (
                 $_POST["id"],    #El id que enviamos
                 $_POST["pais"]

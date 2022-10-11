@@ -15,7 +15,8 @@
     <title><?=$titulo?></title>
     <?php echo Vista::mostrar('./plantilla/css.php',$dataCSS,true); ?>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
+  
     <?php echo Vista::mostrar('./plantilla/nav.php',$datos,true); ?>
     <?php echo Vista::mostrar('./plantilla/aside.php',$datos,true); ?>
 <!-- Content Wrapper. Contains page content -->

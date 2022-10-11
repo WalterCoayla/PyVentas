@@ -23,7 +23,7 @@ class Ciudad extends Modelo {
         return $this->_pais;
     }
     public function leer(){
-        $sql ="SELECT * FROM ". $this->_vista .";";
+        $sql ="SELECT * FROM ". $this->_vista .";";    
         return $this->_bd->ejecutar($sql);
     }
     public function leerXPais($id){

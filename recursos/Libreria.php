@@ -1,5 +1,4 @@
 <?php
-
 abstract class Libreria {
     static function getMenu(){  # Generamos el MENU de opciones
         return array(
@@ -37,7 +36,8 @@ abstract class Libreria {
                 ),
                 array(
                     'nombre'=>'Tempusdominus Bootstrap 4',
-                    'url'=>'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'
+                    'url'=>'recursos/css/bootstrap.min.css'
+                    # 'url'=>'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'
                 ),
                 array(
                     'nombre'=>'iCheck',

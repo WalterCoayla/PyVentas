@@ -5,7 +5,11 @@
     <a href="?ctrl=CtrlCliente&accion=nuevo" class="btn btn-primary">
         <i class="bi bi-plus-circle"></i> 
         Insertar Nuevo Cliente</a>
-    <br><br>
+    <br>
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-nuevo">
+                  Nuevo Cliente...
+                </button>
+                <br>
     <table class="table table-head-fixed text-nowrap">
         <thead>
           <tr>
@@ -43,3 +47,25 @@
         Retornar</a>
     </div>
 </section>
+    <div class="modal fade" id="modal-nuevo">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Nuevo Cliente</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Aqui los datos para agregar nuevo cliente &hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->

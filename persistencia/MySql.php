@@ -1,4 +1,6 @@
 <?php
+mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL);
+
 require_once PER . DIRECTORY_SEPARATOR . 'ManejadorBDInterface.php';
 class MySQL implements ManejadorBDInterface {
     private $_usuario= "root";
@@ -8,17 +10,37 @@ class MySQL implements ManejadorBDInterface {
     private $_conexion;
     # Metodos de la Interface
     public function conectar(){
-        $this->_conexion = mysqli_connect (
-            $this->_servidor,
-            $this->_usuario,
-            $this->_clave,
-            $this->_base );
-        $this->_conexion->set_charset("utf8"); #Para las tildes y caracteres especiales
+        try {
+            $this->_conexion = mysqli_connect (
+                $this->_servidor,
+                $this->_usuario,
+                $this->_clave,
+                $this->_base );
+             $this->_conexion->set_charset("utf8"); #Para las tildes y caracteres especiales
+        } catch (mysqli_sql_exception $e) {
+            // trigger_error ('Ocurrió un error: ' .$e , E_USER_NOTICE);
+            return array(
+                'titulo'=>'Error',
+                'msg'=>$e->getMessage()
+            );
+            // throw $e;
+        }
+        
     }
     public function desconectar(){
+        if (!is_object($this->_conexion)){
+            return array(
+                'titulo'=>'Error',
+                'msg'=>'No pude ejecutar la sentencia: mysqli_close()!!'
+            );
+        }
         mysqli_close($this->_conexion);
     }
     public function traerDatos($sql){
+        mysqli_report (MYSQLI_REPORT_OFF);
+        if (!is_object($this->_conexion)){
+            return false;
+        }
         $retorno = null; 
         $msg=array(
             'titulo'=>'',
@@ -35,7 +57,6 @@ class MySQL implements ManejadorBDInterface {
                         'cuerpo'=>'En la Sentencia SQL: '.$sql));
         else{
             if (is_object($resultado)){ #Si devuelve un SELECT
-                // var_dump($resultado);exit();
                 if($resultado->num_rows==0){
                     $data=null;
                     $msg= array(
@@ -54,8 +75,6 @@ class MySQL implements ManejadorBDInterface {
                     'msg'=> $msg
                 );
         }
-            
         return $retorno;
-        
     }
 }
