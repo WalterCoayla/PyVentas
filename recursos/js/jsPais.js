@@ -26,13 +26,12 @@ $(function () {
     
     $("#nuevo").click(function (e) { 
         e.preventDefault();
-        $("#modal-nuevo").load("ctrl=CtrlCiudad$accion=nuevo", function (response, status, xhr) {
+        let url ='ctrl=CtrlCiudad$accion=nuevo';
+        $("#modal-nuevo").load(url, function (response, status, xhr) {
             if (status == "error") {
                 var msg = "Lo siento pero ocurrió un error: ";
                 alert(msg + xhr.status + " " + xhr.statusText);
             }
-        });   
+        });
     });
-
-    
 });
