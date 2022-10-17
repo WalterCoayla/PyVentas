@@ -1,6 +1,4 @@
 <?php 
-session_start();
-
 require_once 'configuracion.php'; 
 abstract class Index {
     static function run(){

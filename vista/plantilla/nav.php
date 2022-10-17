@@ -26,13 +26,14 @@
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+        <a class="btn btn-app" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
+          Buscar ...
         </a>
         <div class="navbar-search-block">
           <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group input-group-md">
+              <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
               <div class="input-group-append">
                 <button class="btn btn-navbar" type="submit">
                   <i class="fas fa-search"></i>
@@ -50,9 +51,10 @@
         ?>
         <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <?= (isset($_SESSION['nombre']))?$_SESSION['nombre']:'Visitante';?>
+        <a class="btn btn-app" data-toggle="dropdown" href="#" title=" <?=$_SESSION['nombre'];?>">
           <i class="far fa-user"></i>
+          <?=$_SESSION['nombre'];?>
+          
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
@@ -66,7 +68,6 @@
                 </h3>
                 <p class="text-sm">
                   <i class="far fa-envelope"></i> : <?= (isset($_SESSION['email']))?$_SESSION['email']:'-';?>
-
                 </p>
                 <p class="text-sm">
                   <i class="far fa-clock mr-1"></i> Hace 4 hrs.
@@ -76,7 +77,8 @@
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="?ctrl=CtrlUsuario&accion=cambiarClave" class="dropdown-item dropdown-footer">Cambiar Contraseña</a>
+          <a href="?ctrl=CtrlUsuario&accion=cambiarClave" 
+            class="dropdown-item dropdown-footer">Cambiar Contraseña</a>
           <a href="#" class="dropdown-item dropdown-footer">Acerca de...</a>
           <div class="dropdown-divider"></div>
           <a href="?ctrl=CtrlUsuario&accion=cerrarSesion" class="dropdown-item dropdown-footer">Cerrar Sesión</a>
@@ -86,18 +88,26 @@
         } else {
           ?>
         <li class="nav-item">
-          <a class="nav-link" role="button" data-toggle="modal" data-target="#modal-login">Ingresar</a>
-           
-          </a>
+          <a class="btn btn-app" role="button" 
+          data-toggle="modal" data-target="#modal-login" title="Ingresar ...">
+          <i class="far fa-user"></i>
+          Ingresar</a>
+
         </li>  
           <?php
         }
+        $cantProductos =isset($_SESSION['carrito'])?$_SESSION['carrito']->getNroProductos():0;
       ?>
-      
-      
-
-      
-
+        <li class="nav-item">
+          
+          <a href="?ctrl=CtrlCarrito&accion=mostrar" 
+          class="btn btn-app" title="Tiene <?= $cantProductos?> Elementos en el Carrito">
+            <span class="badge bg-warning"><?= $cantProductos?></span>
+              <i class="fa fa-cart-plus"></i>
+              Ver Carrito</a>
+           
+          </a>
+        </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>

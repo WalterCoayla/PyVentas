@@ -34,10 +34,10 @@
             <div class="card-footer">
                 <div class="text-right">
                 
-                <a href="?ctrl=CtrlProducto&accion=verDetalles&id=<?=$d['idproducto']?>" class="btn btn-sm btn-success">
+                <a href="?ctrl=CtrlProducto&accion=verDetalles&id=<?=$d['idproducto']?>&url=catalogo" class="btn btn-sm btn-success">
                     <i class="fas fa-user"></i> Ver detalles
                 </a>
-                <a href="?ctrl=CtrlProducto&accion=agregarCarrito&id=<?=$d['idproducto']?>" class="btn btn-sm btn-primary">
+                <a href="?ctrl=CtrlCarrito&accion=agregar&id=<?=$d['idproducto']?>&url=catalogo" class="btn btn-sm btn-primary">
                     <i class="fas fa-user"></i> Añadir a Carrito
                 </a>
                 </div>

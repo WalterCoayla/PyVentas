@@ -1,6 +1,7 @@
 <?php
 require_once SYS . DIRECTORY_SEPARATOR . 'Controlador.php';
 require_once MOD .DIRECTORY_SEPARATOR . 'Producto.php';
+require_once MOD .DIRECTORY_SEPARATOR . 'Carrito.php';
 require_once REC . DIRECTORY_SEPARATOR . 'Libreria.php';
 /*
 * Clase CtrlProducto
@@ -152,7 +153,7 @@ class CtrlProducto extends Controlador {
         $obj = new Producto();
         $resultado = $obj->leer();
         
-        $msg=array('titulo'=>'','cuerpo'=>'');
+        $msg=(!isset($_GET['id']))?array('titulo'=>'','cuerpo'=>''):array('titulo'=>'Nuevo elemento','cuerpo'=>'Se agregó un elemento al Carrito');
         $datos = array(
             'titulo'=>"Catálogo",
             'contenido'=>Vista::mostrar('producto/catalogo.php',$resultado,true),

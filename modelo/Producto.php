@@ -91,4 +91,24 @@ class Producto extends Modelo {
     public function getNombre(){
         return $this->_nombre;
     }
+    # Devolver productos para Carrito
+    public function getProductosCarrito()    {
+        $prod = null;
+        $productos = $_SESSION['carrito']->getProductos();
+        // var_dump($productos);exit();
+        if (!empty($productos)){
+            foreach ($productos as $key => $value) 
+            $prod[] =$key;
+         
+            $misProductos=implode(",", $prod);
+
+            $sql= "SELECT * FROM ". $this->_vista 
+                . " WHERE idproducto in(".$misProductos.")";
+            // var_dump($sql); exit();
+            return $this->_bd->ejecutar($sql); 
+        }else{
+            return null;
+        }
+        
+    }
 }

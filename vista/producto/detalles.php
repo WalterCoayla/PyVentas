@@ -100,7 +100,7 @@
                         S/ <?=number_format($data[0]['pu'], 2, ',', ' ')?>
                         </h2>
                         <h4 class="mt-0">
-                        <small>Ex Tax: $80.00 </small>
+                        <small>Transporte: S/ 10.00 </small>
                         </h4>
                     </div>
                 </div>
@@ -115,11 +115,14 @@
               </div>
 
               <div class="mt-4">
-                <div class="btn btn-primary btn-lg btn-flat">
+                <a href="?ctrl=CtrlCarrito&accion=agregar&id=<?=$data[0]['idproducto']?>&url=detalles" class="btn btn-primary btn-lg btn-flat">
                   <i class="fas fa-cart-plus fa-lg mr-2"></i>
                   Agregar al carrito
-                </div>
-
+                </a>
+                <a href="?ctrl=CtrlCarrito&accion=mostrar" class="btn btn-primary btn-lg btn-flat">
+                  <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                  Agregar al carrito
+                </a>
                 <div class="btn btn-default btn-lg btn-flat">
                   <i class="fas fa-heart fa-lg mr-2"></i>
                   Añadir a favoritos

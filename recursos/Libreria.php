@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 abstract class Libreria {
     static function getMenu(){  # Generamos el MENU de opciones
         return array(
