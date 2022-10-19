@@ -1,6 +1,7 @@
 <?php
 require_once SYS . DIRECTORY_SEPARATOR . 'Controlador.php';
 require_once MOD .DIRECTORY_SEPARATOR . 'Pais.php';
+require_once MOD .DIRECTORY_SEPARATOR . 'Carrito.php';
 require_once REC . DIRECTORY_SEPARATOR . 'Libreria.php';
 /*
 * Clase CtrlPais

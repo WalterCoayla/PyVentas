@@ -27,7 +27,7 @@
                                 <td width="20%">
                                     <img src="recursos/images/catalogo/<?=$p['url']?>" alt="user-avatar" class="img-fluid">
                                     <hr>
-                                    <a href="?ctrl=CtrlCarrito&accion=eliminar&id=<?=$p['idproducto']?>&url=carrito" class="btn btn-danger">Eliminar</a>
+                                    <a href="?ctrl=CtrlCarrito&accion=sacar&id=<?=$p['idproducto']?>&url=carrito&cant=<?=$cant?>" class="btn btn-danger">Eliminar</a>
                                 </td>
                                 <td>
                                     <h2><?=$p['nombre']?></h2>
@@ -104,13 +104,21 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button class="btn-lg btn-success">Procesar Compra</button>
+                        
+                        <button class="btn-lg btn-success">
+                            <i class="fa fa-cart-arrow-down"></i>
+                        Procesar Compra</button>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <a href="?ctrl=CtrlProducto&accion=getCatalogo" class="btn-lg btn-success">Seguir comprando</a>
+                        
+                        
+                        <a href="?ctrl=CtrlProducto&accion=getCatalogo" 
+                            class="btn-lg btn-primary">
+                            <i class="fa fa-store"></i>
+                            Seguir comprando</a>
                     </div>
                 </div>
                 

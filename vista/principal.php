@@ -47,7 +47,7 @@
                     <li>
                     <img src="dist/img/user1-128x128.jpg" alt="User Image">
                     <a class="users-list-name" href="#">Alexander Pierce</a>
-                    <span class="users-list-date">Today</span>
+                    <span class="users-list-date">Hoy</span>
                     </li>
                     <li>
                     <img src="dist/img/user8-128x128.jpg" alt="User Image">

@@ -37,8 +37,11 @@ class CtrlCarrito extends Controlador {
             echo "Error en objeto";
     }
     public function sacar() {
-        if (isset($_SESSION['carrito']))
-            $_SESSION['carrito']->sacar($_GET['id']);
+        if (isset($_SESSION['carrito'])){
+            $cant = isset($_GET['cant'])?$_GET['cant']:1;
+            $_SESSION['carrito']->sacar($_GET['id'],$cant);
+        }
+            
         
         $this->mostrar();
     }

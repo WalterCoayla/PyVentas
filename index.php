@@ -29,7 +29,8 @@ abstract class Index {
                         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         Evita divulgar tus contraseñas ...\');');
         }else
-            die('La acción <b>'.$accion.'</b> no existe en el controlador '.$controlador.'  - 404 not found');
+        # echo "Hola mundo";
+        die('La acción <b>'.$accion.'</b> no existe en el controlador '.$controlador.'  - 404 not found');
     }
 }
 Index::run();
