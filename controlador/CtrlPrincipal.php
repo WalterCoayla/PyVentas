@@ -26,4 +26,12 @@ class CtrlPrincipal extends Controlador {
         $this->mostrarVista('template.php',$datos);
 
     }
+    public function error404()
+    {
+        $datos= array(
+            'controlador'=>isset($_GET['ctrl'])?$_GET['ctrl']:'CtrlPrincipal',
+            'accion'=>isset($_GET['accion'])?$_GET['accion']:'index'
+        );
+        $this->mostrarVista('404.php',$datos);
+    }
 }

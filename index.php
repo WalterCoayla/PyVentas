@@ -16,7 +16,7 @@ abstract class Index {
             eval ( '$controlador= new '.$controlador.'();' );   # Lo instanciamos
             self::runAccion($controlador,$accion);
         }else
-            die('El controlador <b>'.$fileControlador.'</b> no existe - 404 not found');
+            self::error();
     } 
     static private function runAccion($controlador,$accion){
         if(method_exists($controlador,$accion)){    # Si existe el método
@@ -28,9 +28,19 @@ abstract class Index {
                         Se detectó INTENTO DE ACCESO NO AUTORIZADO..., 
                         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         Evita divulgar tus contraseñas ...\');');
-        }else
+        }else{
+            self::error();
+        }
         # echo "Hola mundo";
-        die('La acción <b>'.$accion.'</b> no existe en el controlador '.$controlador.'  - 404 not found');
+        # die('La acción <b>'.$accion.'</b> no existe en el controlador '.$controlador.'  - 404 not found');
+    }
+    static function error($controlador='CtrlPrincipal',$accion='index'){
+        # Redireccionamos a error 404
+            $fileControlador= CON . DIRECTORY_SEPARATOR .'CtrlPrincipal.php';
+            require_once $fileControlador;  #Lo cargamos (Requerimos)
+            $controlador= new CtrlPrincipal() ;   # Lo instanciamos
+            
+            $controlador->error404();
     }
 }
 Index::run();
