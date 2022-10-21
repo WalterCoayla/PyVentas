@@ -87,7 +87,7 @@ foreach ($jsGbl as $c) { ?>
                 type:'get',
                 data:{'ctrl':'<?=$_GET['ctrl']?>','accion':'editar','id':id}
             }).done(function(data){
-                $('.modal-body').html(data);
+                $('#body-form').html(data);
                 $('#modal-form').modal('show');
             }).fail(function(){
                 alert("error");
@@ -98,7 +98,7 @@ foreach ($jsGbl as $c) { ?>
             var nombre= $(this).data('reg');
            
             $('.modal-title').html('<i class="fa fa-trash"></i> Eliminando el Reg.: '+id );
-            
+            // $('#body-eliminar').html('');
             $('.reg-eliminacion').html('Registro: <code>' + nombre +'</code>');
             $('#btn-confirmar').attr('data-id', id);
             $('#btn-confirmar').attr('href', '?ctrl=<?=$_GET['ctrl']?>&accion=eliminar&id='+id);
