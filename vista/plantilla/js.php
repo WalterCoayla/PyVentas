@@ -65,6 +65,46 @@ foreach ($jsGbl as $c) { ?>
             }
         });
         
-
+        $('.nuevo').click( function(){ 
+            
+            $('.modal-title').html('Nuevo Registro');
+            $.ajax({
+                url:'index.php',
+                type:'get',
+                data:{'ctrl':'<?=$_GET['ctrl']?>','accion':'nuevo'}
+            }).done(function(data){
+                $('.modal-body').html(data);
+                $('#modal-form').modal('show');
+            }).fail(function(){
+                alert("error");
+            });
+        });
+        $('.editar').click( function(){ 
+            var id= $(this).data('id');
+            $('.modal-title').html('Editando el Reg.: '+id);
+            $.ajax({
+                url:'index.php',
+                type:'get',
+                data:{'ctrl':'<?=$_GET['ctrl']?>','accion':'editar','id':id}
+            }).done(function(data){
+                $('.modal-body').html(data);
+                $('#modal-form').modal('show');
+            }).fail(function(){
+                alert("error");
+            });
+        });
+        $('.eliminar').click( function(){ 
+            var id= $(this).data('id');
+            var nombre= $(this).data('reg');
+           
+            $('.modal-title').html('<i class="fa fa-trash"></i> Eliminando el Reg.: '+id );
+            
+            $('.reg-eliminacion').html('Registro: <code>' + nombre +'</code>');
+            $('#btn-confirmar').attr('data-id', id);
+            $('#btn-confirmar').attr('href', '?ctrl=<?=$_GET['ctrl']?>&accion=eliminar&id='+id);
+            // alert($('#btn-confirmar').attr('href'));
+            $('#modal-eliminar').modal('show');
+            
+        });
     });
 </script>

@@ -37,27 +37,7 @@ class CtrlPais extends Controlador {
             header("Location: ?");
             exit();
         }
-        $menu = Libreria::getMenu();
-        $msg= array(
-            'titulo'=>'Nuevo...',
-            'cuerpo'=>'Ingrese información para nuevo Pais');
-        $migas = array(
-            '?'=>'Inicio',
-            '?ctrl=CtrlPais'=>'Listado',
-            '#'=>'Nuevo'
-        );
-        $datos1=array(
-            'encabezado'=>'Nuevo Pais'
-            );
-
-        $datos = array(
-                'titulo'=>'Nuevo Pais',
-                'contenido'=>Vista::mostrar('pais/frmNuevo.php',$datos1,true),
-                'menu'=>$menu,
-                'migas'=>$migas,
-                'msg'=>$msg
-            );
-        $this->mostrarVista('template.php',$datos);
+        echo Vista::mostrar('pais/frmNuevo.php');
     }
 
     public function guardarNuevo(){
@@ -81,6 +61,7 @@ class CtrlPais extends Controlador {
         if (isset($_REQUEST['id'])) {
             $obj = new Pais($_REQUEST['id']);
             $resultado=$obj->eliminar();
+            // var_dump ($resultado);
             $this->index($resultado['msg']);
         } else {
             echo "...El Id a ELIMINAR es requerido";
@@ -105,40 +86,11 @@ class CtrlPais extends Controlador {
         if (isset($_REQUEST['id'])) {
             $obj = new Pais($_REQUEST['id']);
             $miObj = $obj->leerUno();
-            // var_dump($obj->leerUno());exit();
-            if (is_null($miObj['data'])) {
-                $this->index(array(
-                    'titulo'=>'Error',
-                    'cuerpo'=>'ID Requerido: '.$_REQUEST['id']. ' No Existe')
-                );
-            }else{
-                $datos1 = array(
+            $datos1 = array(
                     'pais'=>$obj
                 );
-            $datos = array(
-                'titulo'=>'Editando Pais: '. $_REQUEST['id'],
-                'contenido'=>Vista::mostrar('pais/frmEditar.php',$datos1,true),
-                'menu'=>$menu,
-                'migas'=>$migas,
-                'msg'=>$msg
-            );
+           echo Vista::mostrar('pais/frmEditar.php',$datos1);
             }
-            
-        }else {
-            $msg= array(
-            'titulo'=>'Error',
-            'cuerpo'=>'No se encontró al ID requerido');
-
-            $datos = array(
-                'titulo'=>'Editando Turno... DESCONOCIDO',
-                'contenido'=>'...El Id a Editar es requerido',
-                'menu'=>$menu,
-                'migas'=>$migas,
-                'msg'=>$msg);
-        }
-        
-        $this->mostrarVista('template.php',$datos);
-
         
     }
     public function guardarEditar(){

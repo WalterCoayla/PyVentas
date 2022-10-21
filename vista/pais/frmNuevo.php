@@ -15,11 +15,9 @@
         </div>
         <div class="col-md-3">
         <button type="submit" class="form-control btn btn-primary">
-            <i class="bi bi-save2"></i> Guardar</button>
+            <i class="fa fa-save"></i> Guardar</button>
         </div>
     </form>
-    <br><a href="?ctrl=CtrlPais" class="btn btn-primary">
-        <i class="bi bi-arrow-90deg-left"></i>
-        Retornar</a>
+
 </div>
 </section>
