@@ -73,7 +73,7 @@ foreach ($jsGbl as $c) { ?>
                 type:'get',
                 data:{'ctrl':'<?=$_GET['ctrl']?>','accion':'nuevo'}
             }).done(function(data){
-                $('.modal-body').html(data);
+                $('#body-form').html(data);
                 $('#modal-form').modal('show');
             }).fail(function(){
                 alert("error");
