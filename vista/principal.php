@@ -166,6 +166,36 @@
         <!--/.card -->
     
     </div>
+    <div class="col-12 col-md-6">
+        <!-- USERS LIST -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Modelos por Marca</h3>
+
+                <div class="card-tools">
+                    <span class="badge badge-danger"></span>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <div class="position-relative mb-4">
+                  <canvas id="grafModelosXMarcas" height="200"></canvas>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer text-center">
+                <a href="javascript:">Ver más Estadísticas</a>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!--/.card -->
+    </div>
   </div>
 </div>
 </section>

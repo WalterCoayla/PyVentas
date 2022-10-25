@@ -95,6 +95,12 @@ abstract class Libreria {
             array(
                 'url'=>'recursos/js/jq-toast.min.js'
             ),
+            array(
+                'url'=>'plugins/chart.js/Chart.min.js'
+            ),
+            array(
+                'url'=>'recursos/js/jspdf.debug.js'
+            ),
         );
     }
 

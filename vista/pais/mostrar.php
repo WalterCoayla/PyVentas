@@ -1,10 +1,27 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-
-    <a href="#" class="btn btn-primary nuevo">
-        <i class="bi bi-plus-circle"></i> 
-        Insertar Nuevo Pais</a>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="#" class="btn btn-primary nuevo">
+                <i class="fa fa-plus-circle"></i> 
+                Insertar Nuevo Pais
+            </a>
+        </div>
+        <div class="col-md-6">
+            <div class="text-right">
+                <button id="imprimirPDF" class="btn btn-secondary">
+                    <i class="fa fa-file-pdf"></i> 
+                    Descargar PDF
+                </button>
+                <button id="imprimirExcel" class="btn btn-secondary">
+                    <i class="fa fa-file-excel"></i> 
+                    Descargar XLSX
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <br><br>
     <table id="tablaDatos" class="table table-head-fixed text-nowrap">
         <thead>
@@ -25,7 +42,7 @@
                 <a data-id="<?=$c["idpais"]?>" class="editar" href="#">
                     <i class="bi bi-pencil-square"></i> Editar </a>
                 / 
-                <a data-id="<?=$c["idpais"]?>" data-reg="<?=$c["nombre"]?>" class="eliminar" href="#">
+                <a data-id="<?=$c["idpais"]?>" data-nombre="<?=$c["nombre"]?>" class="eliminar" href="#">
                     <i class="bi bi-trash"></i> Eliminar </a>
                 </td>
             </tr>
@@ -37,7 +54,7 @@
         Retornar</a>
     </div>
 </section>
-<!-- Modal Formulario -->
+<!-- Modal Formulario - Nuevo / Editar -->
 <div class="modal fade" id="modal-form" role="dialog">
     <div class="modal-dialog">
  
@@ -50,6 +67,7 @@
         <div class="modal-body" id="body-form">
     
         </div>
+        
      </div>
     </div>
 </div>
@@ -67,18 +85,10 @@
                     <h5>¿Estas seguro que deseas seguir con la eliminación?</h5>
                     <h5 class="reg-eliminacion">Registro: </h5>
                 </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <a class="btn btn-block btn-danger" id="btn-confirmar" href="" data-id="">Si</a>
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn btn-block btn-secundary" data-dismiss="modal">No</button>
-                    </div>
-                </div>
+            </div>
+            <div class="modal-footer justify-content-between">            
+                <button type="button" class="btn btn-secundary" data-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-danger" id="btn-confirmar" href="" data-id="">Eliminar</a>
             </div>
         </div>
     </div>

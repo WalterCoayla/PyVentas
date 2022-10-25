@@ -4,7 +4,9 @@
     );
     $dataJS = 
       array('jsGbl'=>Libreria::jsGlobales(),
-          'msg'=>$datos['msg']);
+          'msg'=>$datos['msg'],
+        'data'=>$data
+      );
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +32,7 @@
   </aside>
     <?php echo Vista::mostrar('./plantilla/footer.php',$datos,true); ?>
     <?php echo Vista::mostrar('./plantilla/js.php',$dataJS,true); 
+     echo Vista::mostrar('./plantilla/jsEstadisticas.php',$grafico,true); 
     
     // var_dump($js);exit();
     if (isset($js))

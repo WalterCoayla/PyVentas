@@ -11,15 +11,10 @@
                 <input type="text" name="pais" value="<?=$pais->getNombre()?>" 
                     class="form-control">
             </div>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+            <div class="modal-footer justify-content-center">
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-save"></i> Guardar
                     </button>
-                </div>
-                <div class="col-md-4"></div>
-                
             </div>
             
         </form>

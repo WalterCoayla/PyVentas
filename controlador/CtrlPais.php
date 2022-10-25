@@ -21,13 +21,14 @@ class CtrlPais extends Controlador {
 
         $obj = new Pais();
         $resultado = $obj->leer();
-
+        // var_dump($resultado['data']);exit();
         $datos = array(
             'titulo'=>"Paises",
             'contenido'=>Vista::mostrar('pais/mostrar.php',$resultado,true),
             'menu'=>$menu,
             'migas'=>$migas,
-            'msg'=>$msg
+            'msg'=>$msg,
+            'data'=>$resultado['data']
         );
         
         $this->mostrarVista('template.php',$datos);
