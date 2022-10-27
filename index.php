@@ -1,5 +1,9 @@
 <?php 
-require_once 'configuracion.php'; 
+ini_set('display_error',1); //coloca 0 si no se desea que aparezcan los errores también en el navegador
+ini_set('log_error',1);    // con esta línea esmos diciendo que queremos crear un nuevo archivo de errores
+require_once 'configuracion.php';
+ini_set('error_log',ERR);   // con esta línea le decimos a PHP donde queremos que se guarde ese archivo.
+
 abstract class Index {
     static function run(){
         # Si se ha definido algún Controlador
@@ -28,13 +32,10 @@ abstract class Index {
                         Se detectó INTENTO DE ACCESO NO AUTORIZADO..., 
                         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         Evita divulgar tus contraseñas ...\');');
-        }else{
+        }else
             self::error();
-        }
-        # echo "Hola mundo";
-        # die('La acción <b>'.$accion.'</b> no existe en el controlador '.$controlador.'  - 404 not found');
     }
-    static function error($controlador='CtrlPrincipal',$accion='index'){
+    static function error(){
         # Redireccionamos a error 404
             $fileControlador= CON . DIRECTORY_SEPARATOR .'CtrlPrincipal.php';
             require_once $fileControlador;  #Lo cargamos (Requerimos)

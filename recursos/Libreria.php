@@ -98,9 +98,14 @@ abstract class Libreria {
             array(
                 'url'=>'plugins/chart.js/Chart.min.js'
             ),
+            
             array(
                 'url'=>'recursos/js/jspdf.debug.js'
             ),
+            
+            array(
+                'url'=>'recursos/js/jspdf.plugin.autotable3.1.1.min.js'
+            ), 
         );
     }
 

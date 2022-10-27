@@ -1,0 +1,10 @@
+[27-Oct-2022 10:35:56 America/Lima] PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\PyVentas2022\modelo\Pais.php on line 26
+[27-Oct-2022 17:08:07 America/Lima] PHP Fatal error:  Uncaught Error: Call to undefined method Cliente::setLogin() in D:\xampp\htdocs\PyVentas2022\controlador\CtrlCliente.php:162
+Stack trace:
+#0 D:\xampp\htdocs\PyVentas2022\index.php(29) : eval()'d code(1): CtrlCliente->validar()
+#1 D:\xampp\htdocs\PyVentas2022\index.php(29): eval()
+#2 D:\xampp\htdocs\PyVentas2022\index.php(21): Index::runAccion(Object(CtrlCliente), 'validar')
+#3 D:\xampp\htdocs\PyVentas2022\index.php(14): Index::runControlador(Object(CtrlCliente), 'validar')
+#4 D:\xampp\htdocs\PyVentas2022\index.php(47): Index::run()
+#5 {main}
+  thrown in D:\xampp\htdocs\PyVentas2022\controlador\CtrlCliente.php on line 162

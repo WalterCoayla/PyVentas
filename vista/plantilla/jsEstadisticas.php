@@ -1,30 +1,23 @@
-<?php 
-//var_dump($data);exit();
-?>
 <script type="text/javascript">
     $(function () {
      var ticksStyle = {
         fontColor: '#495057',
         fontStyle: 'bold'
     }
-    // alert(ticksStyle)
   var mode = 'index'
   var intersect = true
 
   var $graf = $('#grafModelosXMarcas');
-  // eslint-disable-next-line no-unused-vars
   
   var graf = new Chart($graf, {
     type: 'bar',
     data: {
       labels: <?=json_encode($labels)?>,
-      //labels: ['Marca1', 'Marca2', 'Marca3', 'Marca4'],
       datasets: [
         {
-          backgroundColor: '#007bff',
-          borderColor: '#007bff',
+          backgroundColor: '#00ccff',
+          borderColor: '#007b00',
           data: <?=json_encode($data)?>
-          //  data: ["1000", "2000", "3000", "2500"]
         }
       ]
     },

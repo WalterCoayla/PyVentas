@@ -48,16 +48,20 @@ foreach ($jsGbl as $c) { ?>
         });
         
         $('.nuevo').click( function(){ 
-            
+            let linkNuevo=$(this).html();
+            // alert(linkNuevo)
+            $(this).html('<i class="fa fa-spinner"></i> Cargando...');
             $('.modal-title').html('Nuevo Registro');
             $.ajax({
                 url:'index.php',
                 type:'get',
                 data:{'ctrl':'<?=isset($_GET['ctrl'])?$_GET['ctrl']:''?>','accion':'nuevo'}
             }).done(function(datos){
+                $('.nuevo').html(linkNuevo);
                 $('#body-form').html(datos);
                 $('#modal-form').modal('show');
             }).fail(function(){
+                $('.nuevo').html(linkNuevo);
                 alert("error");
             });
         });
@@ -90,19 +94,46 @@ foreach ($jsGbl as $c) { ?>
         });
         $('#imprimirPDF').click(function (e) { 
             e.preventDefault();
-            alert('Imprimiendo..');
-            var datos= <?=json_encode($data)?>;
-            var doc = new jsPDF();
-            doc.setFontSize(40)
-            doc.setTextColor(255, 0, 0)
-            doc.text(35, 25, 'Paises')
-            doc.setTextColor(0, 255, 0)
-            doc.setFontSize(12)
-            for (let i = 0; i < datos.length; i++) {
-                doc.text(35, 40+i*10, datos[i].idpais)
-                doc.text(50, 40+i*10, datos[i].nombre)
-            }
-            doc.save('prueba.pdf')
+            let link=$(this).html();
+            alert(link)
+            $(this).html('<i class="fa fa-spinner"></i> Descargando...');
+            var datos= <?=json_encode(isset($data)?$data:'');?>;
+            let titulo=$('#titulo').html();
+
+            /**
+             * Añadiendo imagenes
+             */
+             // var logo = new Image();
+
+            // logo.src = 'dist/img/prod-1.jpg';
+            // logo.src = 'recursos/images/logo.JPG';
+
+             /**
+              * Fin añadir imagen
+              */
+            var doc = new jsPDF('p')
+                 // doc.addImage(logo, 'JPEG', 10, 10,20,22);
+
+                doc.setFontSize(20)
+                doc.setTextColor(255, 0, 0) // Rojo
+                doc.text(35, 25, titulo)
+                let columnas =[]
+                columnas.push( Object.keys(datos[0]) )
+
+                let data = [] 
+
+                for (let i in datos) {
+                    data.push( Object.values(datos[i]));
+                }
+
+            doc.autoTable({ 
+                head: columnas,
+                body: data,
+                    margin:{top:40}
+                })
+            $('#imprimirPDF').html(link);
+            doc.save(titulo)
+            
         });
   });
 </script>

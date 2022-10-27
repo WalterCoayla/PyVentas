@@ -168,7 +168,7 @@
     </div>
     <div class="col-12 col-md-6">
         <!-- USERS LIST -->
-        <div class="card">
+        <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Modelos por Marca</h3>
 

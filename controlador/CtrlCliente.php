@@ -13,7 +13,7 @@ class CtrlCliente extends Controlador {
         
         $obj = new Cliente();
         $resultado = $obj->leer();
-        $msg = $msg==null?$this->_getMsg():$msg;
+        $msg = ($msg==null)?$this->_getMsg():$msg;
         $datos = array(
             'titulo'=>"Clientes",
             'contenido'=>Vista::mostrar('cliente/mostrar.php',$resultado,true),
@@ -155,5 +155,31 @@ class CtrlCliente extends Controlador {
             'titulo'=>$titulo,
             'cuerpo'=>$msg
         );
+    }
+    public function validar(){
+        if (isset($_POST['usuario']) && isset($_POST['clave'])) {
+            $obj = new Cliente();
+           /* $obj->setLogin($_POST['usuario']);
+            $obj->setClave($_POST['clave']);
+            */
+            $datos=$obj->validar($_POST['usuario'],$_POST['clave']);
+            // var_dump($datos);exit();
+            if (isset($datos['data']))
+                if($datos['data']!=null){
+                    $_SESSION['nombre']=$datos['data'][0]['nombres'] .' '. $datos['data'][0]['apellidos'];
+                    $_SESSION['email']=$datos['data'][0]['email'];
+                    $_SESSION['id']=$datos['data'][0]['idcliente'];
+                    $_SESSION['dni']=$datos['data'][0]['dni'];
+                }
+            
+        }
+        header("Location: ?");
+        exit();
+    }
+    public function cerrarSesion()
+    {
+        session_destroy();
+        header("Location: ?");
+        exit();
     }
 }

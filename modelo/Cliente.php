@@ -8,6 +8,8 @@ class Cliente extends Modelo {
     private $_apellido;
     private $_dni;
     private $_ciudad;
+    private $_login;
+    private $_password;
     private $_tabla="clientes";
     private $_vista="v_clientes";
     private $_bd;
@@ -86,5 +88,11 @@ class Cliente extends Modelo {
     }
     public function getDni(){
         return $this->_dni;
+    }
+    public function validar($login,$clave){
+        $sql= "SELECT * FROM ". $this->_tabla 
+            . " WHERE login='".$login ."' and pasword='".$clave ."'";
+        
+        return $this->_bd->ejecutar($sql);
     }
 }

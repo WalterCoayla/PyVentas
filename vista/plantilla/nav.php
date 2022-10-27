@@ -134,7 +134,7 @@
         <div class="modal-body">
             <p class="login-box-msg">Registre la siguiente información</p>
 
-        <form action="?ctrl=CtrlUsuario&accion=validar" method="post">
+        <form action="?ctrl=CtrlCliente&accion=validar" method="post">
             <div class="input-group mb-3">
             <input type="text" name="usuario" class="form-control" placeholder="Usuario">
             <div class="input-group-append">

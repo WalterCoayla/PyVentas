@@ -21,3 +21,6 @@ define('PER', APP . DIRECTORY_SEPARATOR . 'persistencia');
 
 /* recursos */
 define('REC', APP . DIRECTORY_SEPARATOR . 'recursos');
+
+/* errores */
+define('ERR', APP . DIRECTORY_SEPARATOR . 'php_error_log');

@@ -5,7 +5,7 @@
     $dataJS = 
       array('jsGbl'=>Libreria::jsGlobales(),
           'msg'=>$datos['msg'],
-        'data'=>$data
+        'data'=>isset($data)?$data:''
       );
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,10 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   
     <?php echo Vista::mostrar('./plantilla/nav.php',$datos,true); ?>
-    <?php echo Vista::mostrar('./plantilla/aside.php',$datos,true); ?>
+    <?php 
+      if (isset($_SESSION['nombre']))
+        echo Vista::mostrar('./plantilla/aside.php',$datos,true); 
+    ?>
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <?php echo Vista::mostrar('./plantilla/wrapper.php',$datos,true); ?>
@@ -32,6 +35,7 @@
   </aside>
     <?php echo Vista::mostrar('./plantilla/footer.php',$datos,true); ?>
     <?php echo Vista::mostrar('./plantilla/js.php',$dataJS,true); 
+    if (isset($grafico))
      echo Vista::mostrar('./plantilla/jsEstadisticas.php',$grafico,true); 
     
     // var_dump($js);exit();
