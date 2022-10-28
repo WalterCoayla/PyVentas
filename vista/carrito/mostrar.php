@@ -105,9 +105,9 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         
-                        <button class="btn-lg btn-success">
+                        <a href="?ctrl=CtrlBoleta&accion=guardarNuevo" class="btn-lg btn-success">
                             <i class="fa fa-cart-arrow-down"></i>
-                        Procesar Compra</button>
+                        Procesar Compra</a>
                     </div>
                 </div>
                 <hr>

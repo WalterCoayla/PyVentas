@@ -4,7 +4,12 @@ require_once PER . DIRECTORY_SEPARATOR . "BaseDeDatos.php";
 
 class Boleta extends Modelo {
     private $_id;
-    private $_nombre;
+    private $_nro;
+    private $_fecha;
+    private $_total;
+    private $_cliente;
+    private $_detalles;
+
     private $_tabla="boletas";
     private $_bd;
 
@@ -42,12 +47,21 @@ class Boleta extends Modelo {
         return $this->_bd->ejecutar($sql);
     }
 
-    public function nuevo(){
+    public function nuevo($total=0,$idCliente=1,$detalles=null){
         $sql = "INSERT INTO ". $this->_tabla 
-            ." (idpais, nombre) VALUES (".
-                $this->_id .",'". $this->_nombre ."'"
+            ." (total, idcliente) VALUES (".
+                $total .",". $idCliente
             .");";
-        return $this->_bd->ejecutar($sql);
+        $this->_bd->ejecutar($sql);
+
+        foreach ($detalles as $d) {
+            $sql = "INSERT INTO detallesboletas" 
+            ." (cantidad, pu,subtotal,idproducto) VALUES (".
+                $d['cant'] .",". $d['pu'].",". $d['subtotal'].",". $d['idproducto']
+            .");";
+        $this->_bd->ejecutar($sql);
+        }
+
     }
     public function getId(){
         return $this->_id;

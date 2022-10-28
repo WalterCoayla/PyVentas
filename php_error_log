@@ -8,3 +8,13 @@ Stack trace:
 #4 D:\xampp\htdocs\PyVentas2022\index.php(47): Index::run()
 #5 {main}
   thrown in D:\xampp\htdocs\PyVentas2022\controlador\CtrlCliente.php on line 162
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 52
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "pu" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 53
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 59
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 52
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "pu" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 53
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 59
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined variable $_SESION in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 64
+[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 64
+[27-Oct-2022 20:42:24 America/Lima] PHP Warning:  Undefined variable $_SESION in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 65
+[27-Oct-2022 20:42:24 America/Lima] PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 65

@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2022 a las 00:41:00
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.0
+-- Host: 127.0.0.1
+-- Generation Time: Oct 27, 2022 at 08:57 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,50 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bd_ventas2022`
+-- Database: `bd_ventas2022`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `AreaCuadrado` (`Lado` INT) RETURNS INT(11) BEGIN
+  return Lado*Lado;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `GetNroBoletaMax` () RETURNS INT(11) NO SQL
+BEGIN
+Declare Contador int DEFAULT 0;
+Select max(idboleta) into Contador from boletas;
+return Contador;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `NuevoIdBoleta` () RETURNS INT(11) BEGIN
+Declare Contador int DEFAULT 0;
+
+Select max(idboleta) into Contador from boletas;
+IF (Contador IS NULL) THEN
+	set Contador=0;
+end if;	
+return Contador+1;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `NuevoNroBoleta` () RETURNS VARCHAR(10) CHARSET latin1 BEGIN
+Declare Contador int DEFAULT 0;
+
+Select max(right(nro,8)) into Contador from boletas;
+IF (Contador IS NULL) THEN
+	set Contador=0;
+end if;	
+return concat('B-',right(concat('00000000',Contador+1),8)) ;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auditoria`
+-- Table structure for table `auditoria`
 --
 
 CREATE TABLE `auditoria` (
@@ -41,7 +78,7 @@ CREATE TABLE `auditoria` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `boletas`
+-- Table structure for table `boletas`
 --
 
 CREATE TABLE `boletas` (
@@ -52,10 +89,29 @@ CREATE TABLE `boletas` (
   `idcliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `boletas`
+--
+
+INSERT INTO `boletas` (`idboleta`, `nro`, `fecha`, `total`, `idcliente`) VALUES
+(1, 'B-00000001', '2022-10-28 01:45:12', '7535.0000000', 1);
+
+--
+-- Triggers `boletas`
+--
+DELIMITER $$
+CREATE TRIGGER `NuevaBoleta` BEFORE INSERT ON `boletas` FOR EACH ROW begin
+	set new.idboleta=NuevoIdBoleta();
+    set new.nro=NuevoNroBoleta();
+    set new.fecha=now();
+ end
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ciudades`
+-- Table structure for table `ciudades`
 --
 
 CREATE TABLE `ciudades` (
@@ -65,7 +121,7 @@ CREATE TABLE `ciudades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `ciudades`
+-- Dumping data for table `ciudades`
 --
 
 INSERT INTO `ciudades` (`idciudad`, `nombre`, `idpais`) VALUES
@@ -78,7 +134,7 @@ INSERT INTO `ciudades` (`idciudad`, `nombre`, `idpais`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clientes`
+-- Table structure for table `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -89,21 +145,22 @@ CREATE TABLE `clientes` (
   `idciudad` int(11) DEFAULT NULL,
   `login` varchar(15) DEFAULT NULL,
   `pasword` varchar(100) DEFAULT NULL,
-  `estado` varchar(1) DEFAULT NULL
+  `estado` varchar(1) DEFAULT NULL,
+  `email` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `clientes`
+-- Dumping data for table `clientes`
 --
 
-INSERT INTO `clientes` (`idcliente`, `nombres`, `apellidos`, `dni`, `idciudad`, `login`, `pasword`, `estado`) VALUES
-(1, 'Walter', 'Coayla', '04431751', 1, 'wcoayla', '123456', '1'),
-(2, 'Juan', 'Perez sdfasdfas', '12345678', 4, NULL, NULL, NULL);
+INSERT INTO `clientes` (`idcliente`, `nombres`, `apellidos`, `dni`, `idciudad`, `login`, `pasword`, `estado`, `email`) VALUES
+(1, 'Walter', 'Coayla', '04431751', 1, 'wcoayla', '123456', '1', 'walter.coayla@gmail.com'),
+(2, 'Juan', 'Perez sdfasdfas', '12345678', 4, 'jperez', '102030', '0', '');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detallesboletas`
+-- Table structure for table `detallesboletas`
 --
 
 CREATE TABLE `detallesboletas` (
@@ -115,10 +172,28 @@ CREATE TABLE `detallesboletas` (
   `idproducto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `detallesboletas`
+--
+
+INSERT INTO `detallesboletas` (`iddetalle`, `cantidad`, `pu`, `subtotal`, `idboleta`, `idproducto`) VALUES
+(6, 3, '2500.0000000', '7500.0000000', 1, 2),
+(7, 1, '35.0000000', '35.0000000', 1, 3);
+
+--
+-- Triggers `detallesboletas`
+--
+DELIMITER $$
+CREATE TRIGGER `SetNroBoleta` BEFORE INSERT ON `detallesboletas` FOR EACH ROW begin
+	set new.idboleta = GetNroBoletaMax();
+ end
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `imagenes_producto`
+-- Table structure for table `imagenes_producto`
 --
 
 CREATE TABLE `imagenes_producto` (
@@ -129,7 +204,7 @@ CREATE TABLE `imagenes_producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `imagenes_producto`
+-- Dumping data for table `imagenes_producto`
 --
 
 INSERT INTO `imagenes_producto` (`idimagen`, `url`, `idproducto`, `nombre`) VALUES
@@ -148,7 +223,7 @@ INSERT INTO `imagenes_producto` (`idimagen`, `url`, `idproducto`, `nombre`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `marcas`
+-- Table structure for table `marcas`
 --
 
 CREATE TABLE `marcas` (
@@ -157,7 +232,7 @@ CREATE TABLE `marcas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `marcas`
+-- Dumping data for table `marcas`
 --
 
 INSERT INTO `marcas` (`idmarca`, `marca`) VALUES
@@ -169,7 +244,7 @@ INSERT INTO `marcas` (`idmarca`, `marca`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `modelos`
+-- Table structure for table `modelos`
 --
 
 CREATE TABLE `modelos` (
@@ -179,7 +254,7 @@ CREATE TABLE `modelos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `modelos`
+-- Dumping data for table `modelos`
 --
 
 INSERT INTO `modelos` (`idmodelo`, `modelo`, `idmarca`) VALUES
@@ -190,12 +265,16 @@ INSERT INTO `modelos` (`idmodelo`, `modelo`, `idmarca`) VALUES
 (5, 'ThinkPad E15', 2),
 (6, 'ThinkBook Plus', 2),
 (7, '14z90p', 4),
-(8, 'Gram', 4);
+(8, 'Gram', 4),
+(9, 'Modelo 123', 1),
+(10, 'Modelo 234', 1),
+(11, '22233', 2),
+(12, '444', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `paises`
+-- Table structure for table `paises`
 --
 
 CREATE TABLE `paises` (
@@ -204,18 +283,19 @@ CREATE TABLE `paises` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `paises`
+-- Dumping data for table `paises`
 --
 
 INSERT INTO `paises` (`idpais`, `nombre`) VALUES
 (1, 'Perú'),
 (2, 'Brasil'),
-(3, 'Colombia');
+(3, 'Colombia'),
+(4, 'Canada');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `perfiles`
+-- Table structure for table `perfiles`
 --
 
 CREATE TABLE `perfiles` (
@@ -224,7 +304,7 @@ CREATE TABLE `perfiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `perfiles`
+-- Dumping data for table `perfiles`
 --
 
 INSERT INTO `perfiles` (`idperfil`, `perfil`) VALUES
@@ -236,7 +316,7 @@ INSERT INTO `perfiles` (`idperfil`, `perfil`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -249,7 +329,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`idproducto`, `nombre`, `descripcion`, `pu`, `idmodelo`, `stock`) VALUES
@@ -262,7 +342,7 @@ INSERT INTO `productos` (`idproducto`, `nombre`, `descripcion`, `pu`, `idmodelo`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -278,7 +358,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nombre`, `login`, `pasword`, `estado`, `fechaalta`, `idperfil`, `email`, `telefono`) VALUES
@@ -287,8 +367,8 @@ INSERT INTO `usuarios` (`idusuario`, `nombre`, `login`, `pasword`, `estado`, `fe
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `v_ciudades`
--- (Véase abajo para la vista actual)
+-- Stand-in structure for view `v_ciudades`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_ciudades` (
 `idciudad` int(11)
@@ -300,8 +380,8 @@ CREATE TABLE `v_ciudades` (
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `v_clientes`
--- (Véase abajo para la vista actual)
+-- Stand-in structure for view `v_clientes`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_clientes` (
 `idcliente` int(11)
@@ -317,8 +397,19 @@ CREATE TABLE `v_clientes` (
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `v_producto`
--- (Véase abajo para la vista actual)
+-- Stand-in structure for view `v_graf_modelos_x_marca`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_graf_modelos_x_marca` (
+`marca` varchar(80)
+,`cant` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_producto`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_producto` (
 `idproducto` int(11)
@@ -335,8 +426,8 @@ CREATE TABLE `v_producto` (
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `v_producto01`
--- (Véase abajo para la vista actual)
+-- Stand-in structure for view `v_producto01`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_producto01` (
 `idproducto` int(11)
@@ -354,7 +445,7 @@ CREATE TABLE `v_producto01` (
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `v_ciudades`
+-- Structure for view `v_ciudades`
 --
 DROP TABLE IF EXISTS `v_ciudades`;
 
@@ -363,7 +454,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `v_clientes`
+-- Structure for view `v_clientes`
 --
 DROP TABLE IF EXISTS `v_clientes`;
 
@@ -372,7 +463,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `v_producto`
+-- Structure for view `v_graf_modelos_x_marca`
+--
+DROP TABLE IF EXISTS `v_graf_modelos_x_marca`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_graf_modelos_x_marca`  AS SELECT `ma`.`marca` AS `marca`, count(`mo`.`idmodelo`) AS `cant` FROM (`marcas` `ma` join `modelos` `mo` on(`ma`.`idmarca` = `mo`.`idmarca`)) GROUP BY `ma`.`marca` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_producto`
 --
 DROP TABLE IF EXISTS `v_producto`;
 
@@ -381,45 +481,45 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `v_producto01`
+-- Structure for view `v_producto01`
 --
 DROP TABLE IF EXISTS `v_producto01`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_producto01`  AS SELECT `p`.`idproducto` AS `idproducto`, `p`.`nombre` AS `nombre`, `p`.`descripcion` AS `descripcion`, `p`.`pu` AS `pu`, `p`.`idmodelo` AS `idmodelo`, `p`.`stock` AS `stock`, `mo`.`modelo` AS `modelo`, `mo`.`idmarca` AS `idmarca`, `ma`.`marca` AS `marca`, `im`.`url` AS `url` FROM (((`productos` `p` join `modelos` `mo` on(`p`.`idmodelo` = `mo`.`idmodelo`)) join `marcas` `ma` on(`mo`.`idmarca` = `ma`.`idmarca`)) left join `imagenes_producto` `im` on(`p`.`idproducto` = `im`.`idproducto`)) GROUP BY `p`.`idproducto`, `p`.`nombre`, `p`.`descripcion`, `p`.`pu`, `p`.`idmodelo`, `p`.`stock`, `mo`.`modelo`, `mo`.`idmarca`, `ma`.`marca` ;
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `auditoria`
+-- Indexes for table `auditoria`
 --
 ALTER TABLE `auditoria`
   ADD PRIMARY KEY (`idauditoria`);
 
 --
--- Indices de la tabla `boletas`
+-- Indexes for table `boletas`
 --
 ALTER TABLE `boletas`
   ADD PRIMARY KEY (`idboleta`),
   ADD KEY `Obtiene` (`idcliente`);
 
 --
--- Indices de la tabla `ciudades`
+-- Indexes for table `ciudades`
 --
 ALTER TABLE `ciudades`
   ADD PRIMARY KEY (`idciudad`),
   ADD KEY `Tiene` (`idpais`);
 
 --
--- Indices de la tabla `clientes`
+-- Indexes for table `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`idcliente`),
   ADD KEY `Vive` (`idciudad`);
 
 --
--- Indices de la tabla `detallesboletas`
+-- Indexes for table `detallesboletas`
 --
 ALTER TABLE `detallesboletas`
   ADD PRIMARY KEY (`iddetalle`),
@@ -427,110 +527,116 @@ ALTER TABLE `detallesboletas`
   ADD KEY `FiguraEn` (`idproducto`);
 
 --
--- Indices de la tabla `imagenes_producto`
+-- Indexes for table `imagenes_producto`
 --
 ALTER TABLE `imagenes_producto`
   ADD PRIMARY KEY (`idimagen`),
   ADD KEY `R_20` (`idproducto`);
 
 --
--- Indices de la tabla `marcas`
+-- Indexes for table `marcas`
 --
 ALTER TABLE `marcas`
   ADD PRIMARY KEY (`idmarca`);
 
 --
--- Indices de la tabla `modelos`
+-- Indexes for table `modelos`
 --
 ALTER TABLE `modelos`
   ADD PRIMARY KEY (`idmodelo`),
   ADD KEY `Tiene2` (`idmarca`);
 
 --
--- Indices de la tabla `paises`
+-- Indexes for table `paises`
 --
 ALTER TABLE `paises`
   ADD PRIMARY KEY (`idpais`);
 
 --
--- Indices de la tabla `perfiles`
+-- Indexes for table `perfiles`
 --
 ALTER TABLE `perfiles`
   ADD PRIMARY KEY (`idperfil`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`idproducto`),
   ADD KEY `Es_de` (`idmodelo`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`idusuario`),
   ADD KEY `R_19` (`idperfil`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `imagenes_producto`
+-- AUTO_INCREMENT for table `detallesboletas`
+--
+ALTER TABLE `detallesboletas`
+  MODIFY `iddetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `imagenes_producto`
 --
 ALTER TABLE `imagenes_producto`
   MODIFY `idimagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `boletas`
+-- Constraints for table `boletas`
 --
 ALTER TABLE `boletas`
   ADD CONSTRAINT `Obtiene` FOREIGN KEY (`idcliente`) REFERENCES `clientes` (`idcliente`);
 
 --
--- Filtros para la tabla `ciudades`
+-- Constraints for table `ciudades`
 --
 ALTER TABLE `ciudades`
   ADD CONSTRAINT `Tiene` FOREIGN KEY (`idpais`) REFERENCES `paises` (`idpais`);
 
 --
--- Filtros para la tabla `clientes`
+-- Constraints for table `clientes`
 --
 ALTER TABLE `clientes`
   ADD CONSTRAINT `Vive` FOREIGN KEY (`idciudad`) REFERENCES `ciudades` (`idciudad`);
 
 --
--- Filtros para la tabla `detallesboletas`
+-- Constraints for table `detallesboletas`
 --
 ALTER TABLE `detallesboletas`
   ADD CONSTRAINT `FiguraEn` FOREIGN KEY (`idproducto`) REFERENCES `productos` (`idproducto`),
   ADD CONSTRAINT `Tiene1` FOREIGN KEY (`idboleta`) REFERENCES `boletas` (`idboleta`);
 
 --
--- Filtros para la tabla `imagenes_producto`
+-- Constraints for table `imagenes_producto`
 --
 ALTER TABLE `imagenes_producto`
   ADD CONSTRAINT `R_20` FOREIGN KEY (`idproducto`) REFERENCES `productos` (`idproducto`);
 
 --
--- Filtros para la tabla `modelos`
+-- Constraints for table `modelos`
 --
 ALTER TABLE `modelos`
   ADD CONSTRAINT `Tiene2` FOREIGN KEY (`idmarca`) REFERENCES `marcas` (`idmarca`);
 
 --
--- Filtros para la tabla `productos`
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `Es_de` FOREIGN KEY (`idmodelo`) REFERENCES `modelos` (`idmodelo`);
 
 --
--- Filtros para la tabla `usuarios`
+-- Constraints for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `R_19` FOREIGN KEY (`idperfil`) REFERENCES `perfiles` (`idperfil`);
