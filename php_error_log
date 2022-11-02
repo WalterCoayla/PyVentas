@@ -1,20 +1,32 @@
-[27-Oct-2022 10:35:56 America/Lima] PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\PyVentas2022\modelo\Pais.php on line 26
-[27-Oct-2022 17:08:07 America/Lima] PHP Fatal error:  Uncaught Error: Call to undefined method Cliente::setLogin() in D:\xampp\htdocs\PyVentas2022\controlador\CtrlCliente.php:162
-Stack trace:
-#0 D:\xampp\htdocs\PyVentas2022\index.php(29) : eval()'d code(1): CtrlCliente->validar()
-#1 D:\xampp\htdocs\PyVentas2022\index.php(29): eval()
-#2 D:\xampp\htdocs\PyVentas2022\index.php(21): Index::runAccion(Object(CtrlCliente), 'validar')
-#3 D:\xampp\htdocs\PyVentas2022\index.php(14): Index::runControlador(Object(CtrlCliente), 'validar')
-#4 D:\xampp\htdocs\PyVentas2022\index.php(47): Index::run()
-#5 {main}
-  thrown in D:\xampp\htdocs\PyVentas2022\controlador\CtrlCliente.php on line 162
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 52
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "pu" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 53
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 59
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 52
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "pu" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 53
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined array key "idproducto" in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 59
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Undefined variable $_SESION in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 64
-[27-Oct-2022 20:37:52 America/Lima] PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 64
-[27-Oct-2022 20:42:24 America/Lima] PHP Warning:  Undefined variable $_SESION in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 65
-[27-Oct-2022 20:42:24 America/Lima] PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\PyVentas2022\controlador\CtrlBoleta.php on line 65
+[31-Oct-2022 19:46:45 America/Lima] PHP Warning:  Header may not contain more than a single header, new line detected in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 3
+[31-Oct-2022 19:47:59 America/Lima] PHP Warning:  Header may not contain more than a single header, new line detected in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 3
+[31-Oct-2022 19:58:11 America/Lima] PHP Warning:  filesize(): stat failed for reporte.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 9
+[31-Oct-2022 19:58:11 America/Lima] PHP Warning:  readfile(reporte.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 12
+[31-Oct-2022 19:59:51 America/Lima] PHP Warning:  filesize(): stat failed for myfile.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 5
+[31-Oct-2022 19:59:51 America/Lima] PHP Warning:  readfile(myfile.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 9
+[31-Oct-2022 20:07:49 America/Lima] PHP Warning:  filesize(): stat failed for myfile.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 5
+[31-Oct-2022 20:07:49 America/Lima] PHP Warning:  readfile(myfile.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 9
+[31-Oct-2022 20:08:47 America/Lima] PHP Warning:  filesize(): stat failed for myfile.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 5
+[31-Oct-2022 20:08:47 America/Lima] PHP Warning:  readfile(myfile.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 9
+[31-Oct-2022 20:09:25 America/Lima] PHP Warning:  filesize(): stat failed for myfile.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 5
+[31-Oct-2022 20:09:25 America/Lima] PHP Warning:  readfile(myfile.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 9
+[31-Oct-2022 20:12:14 America/Lima] PHP Warning:  filesize(): stat failed for myfile.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 5
+[31-Oct-2022 20:12:14 America/Lima] PHP Warning:  readfile(myfile.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 9
+[31-Oct-2022 20:12:49 America/Lima] PHP Warning:  readfile(myfile.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 9
+[31-Oct-2022 20:34:29 America/Lima] PHP Warning:  filesize(): stat failed for myfile.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 5
+[31-Oct-2022 20:34:29 America/Lima] PHP Warning:  readfile(myfile.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 11
+[31-Oct-2022 20:35:33 America/Lima] PHP Warning:  filesize(): stat failed for abc.xls in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 11
+[31-Oct-2022 20:35:33 America/Lima] PHP Warning:  readfile(abc.xls): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 14
+[31-Oct-2022 20:36:00 America/Lima] PHP Warning:  filesize(): stat failed for abc.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 11
+[31-Oct-2022 20:36:00 America/Lima] PHP Warning:  readfile(abc.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 14
+[31-Oct-2022 20:36:43 America/Lima] PHP Warning:  filesize(): stat failed for abc.xlsx in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 11
+[31-Oct-2022 20:36:43 America/Lima] PHP Warning:  readfile(abc.xlsx): Failed to open stream: No such file or directory in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 14
+[31-Oct-2022 21:01:01 America/Lima] PHP Warning:  Undefined variable $data in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 36
+[31-Oct-2022 21:02:41 America/Lima] PHP Warning:  Undefined array key "idpais" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 39
+[31-Oct-2022 21:02:41 America/Lima] PHP Warning:  Undefined array key "nombre" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 40
+[31-Oct-2022 21:02:41 America/Lima] PHP Warning:  Undefined array key "idpais" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 39
+[31-Oct-2022 21:02:41 America/Lima] PHP Warning:  Undefined array key "nombre" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 40
+[31-Oct-2022 21:04:09 America/Lima] PHP Warning:  Undefined array key "idpais" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 39
+[31-Oct-2022 21:04:09 America/Lima] PHP Warning:  Undefined array key "nombre" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 40
+[31-Oct-2022 21:04:09 America/Lima] PHP Warning:  Undefined array key "idpais" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 39
+[31-Oct-2022 21:04:09 America/Lima] PHP Warning:  Undefined array key "nombre" in D:\xampp\htdocs\PyVentas2022\vista\pais\reporteXLSX.php on line 40

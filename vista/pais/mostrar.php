@@ -14,10 +14,14 @@
                     <i class="fa fa-file-pdf"></i> 
                     Descargar PDF
                 </button>
-                <button id="imprimirExcel" class="btn btn-secondary">
+                <a href="?ctrl=CtrlPais&accion=reporte&app=excel" class="btn btn-secondary">
                     <i class="fa fa-file-excel"></i> 
-                    Descargar XLSX
-                </button>
+                    Descargar XLS
+                </a>
+                <a href="?ctrl=CtrlPais&accion=reporte&app=word" class="btn btn-secondary">
+                    <i class="fa fa-file-word"></i> 
+                    Descargar DOC
+                </a>
             </div>
         </div>
     </div>

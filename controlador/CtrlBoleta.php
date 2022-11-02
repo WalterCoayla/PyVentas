@@ -63,83 +63,9 @@ class CtrlBoleta extends Controlador {
         }
         $obj = new Boleta();
         $obj->nuevo($total, $_SESSION['id'],$datosDetalle);
+        header("Location: ?accion=gracias");
+                exit();
     }
 
-    /* public function guardarNuevo(){
-        if(!isset($_SESSION['nombre'])){
-            header("Location: ?");
-            exit();
-        }
-        $obj = new Pais (
-                $_POST["id"],
-                $_POST["pais"],
-                );
-        $respuesta=$obj->nuevo();
-
-        $this->index($respuesta['msg']);
-    }
     
-    public function eliminar(){
-        if(!isset($_SESSION['nombre'])){
-            header("Location: ?");
-            exit();
-        }
-        if (isset($_REQUEST['id'])) {
-            $obj = new Pais($_REQUEST['id']);
-            $resultado=$obj->eliminar();
-            // var_dump ($resultado);
-            $this->index($resultado['msg']);
-        } else {
-            echo "...El Id a ELIMINAR es requerido";
-        }
-    }
-    public function editar(){
-        if(!isset($_SESSION['nombre'])){
-            header("Location: ?");
-            exit();
-        }
-        #Mostramos el Formulario de Editar
-        $datos=null;
-        $menu = Libreria::getMenu();
-        $msg= array(
-            'titulo'=>'Editando...',
-            'cuerpo'=>'Iniciando edición de: '.$_REQUEST['id']);
-        $migas = array(
-            '?'=>'Inicio',
-            '?ctrl=CtrlPais'=>'Listado',
-            '#'=>'Editar',
-        );
-        if (isset($_REQUEST['id'])) {
-            $obj = new Pais($_REQUEST['id']);
-            $miObj = $obj->leerUno();
-            $datos1 = array(
-                    'pais'=>$obj
-                );
-           echo Vista::mostrar('pais/frmEditar.php',$datos1);
-            }
-        
-    }
-    public function guardarEditar(){
-        if(!isset($_SESSION['nombre'])){
-            header("Location: ?");
-            exit();
-        }
-        $obj = new Pais (
-                $_POST["id"],    #El id que enviamos
-                $_POST["pais"]
-                );
-        $respuesta=$obj->editar();
-        
-        $this->index($respuesta['msg']);
-    }
-    public function getPaisesSelect(){
-        $obj = new Pais();
-        $datos = $obj->leer()['data'];
-        $html = '<option value="0">Seleccionar...</option>';
-        foreach ($datos as $d) {
-            $html .= '<option value="'.$d['idpais'].'">'.$d['nombre'].'</option>';
-        }
-        echo $html;
-    }
-    */
 }

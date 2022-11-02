@@ -116,4 +116,32 @@ class CtrlPais extends Controlador {
         }
         echo $html;
     }
+    public function reporte()
+    {
+        $obj = new Pais();
+        $resultado = $obj->leer();
+
+        if(isset($_GET['app'])){
+            switch ($_GET['app']) {
+                case 'excel':
+                    $datos=array(
+                        'app'=>'excel',
+                        'filename'=>'Paises.xls',
+                        'data'=>$resultado['data']
+                    );
+                    break;
+                
+                default:
+                    $datos=array(
+                        'app'=>'word',
+                        'filename'=>'Paises.doc',
+                        'data'=>$resultado['data']
+                    );
+                    break;
+            }
+            
+            Vista::mostrar('pais/reporteXLSX.php',$datos);
+        }
+        
+    }
 }
