@@ -63,9 +63,41 @@ class CtrlBoleta extends Controlador {
         }
         $obj = new Boleta();
         $obj->nuevo($total, $_SESSION['id'],$datosDetalle);
-        header("Location: ?accion=gracias");
-                exit();
+        
+        $this->registrarCompra();
     }
 
-    
+    public function registrarCompra(){
+        $obj = new Boleta();
+        $data=$obj->getUltimaBoletaCliente($_SESSION['id']);
+
+        $menu= Libreria::getMenu();
+        $migas = array(
+            '?'=>'Inicio',
+        );
+        // $datosGraf= $this->getGraficoModelosXMarcas();
+        unset($_SESSION['carrito']);
+        
+        $datos = array(
+            'titulo'=>"Registro de Compra realizada",
+            'contenido'=>Vista::mostrar('boleta/registroCompra.php',$data,true),
+            'menu'=>$menu,
+            'migas'=>$migas,
+            'msg'=>array(
+                    'titulo'=>'',
+                    'cuerpo'=>''
+            ),
+            'data'=>null,
+            'grafico'=>null
+        );
+        
+        $this->mostrarVista('template.php',$datos);
+
+    }
+
+    public function imprimir(){
+        $obj = new Boleta();
+        $data=$obj->getUltimaBoletaDetalleCliente($_SESSION['id']);
+        Vista::mostrar('boleta/boleta.php',$data);
+    }
 }

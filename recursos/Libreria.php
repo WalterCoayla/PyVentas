@@ -2,8 +2,8 @@
 session_start();
 
 abstract class Libreria {
-    static function getMenu(){  # Generamos el MENU de opciones
-        return array(
+    static function getMenu($perfil=0){  # Generamos el MENU de opciones
+        $menuAdmin = array(
             array(
                 'icono'=>'globe',
                 'enlace'=>'CtrlPais',
@@ -20,6 +20,21 @@ abstract class Libreria {
                 'texto'=>'Clientes'
             )
         );
+        switch ($perfil) {
+            case '0':   # Admin
+                $menu = $menuAdmin;
+                break;
+            case '1':   # empleado
+                $menu = $menuEmpleado;
+                break;
+            case '2':   # empleado
+                $menu = $menuCliente;
+                break;
+            default:
+                $menu = $menuAdmin;
+                break;
+        }
+        return $menu;
     }
     static function cssGlobales(){
         return array(

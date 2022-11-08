@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <form action="?ctrl=CtrlPais&accion=guardarEditar" method="post">
             <div class="input-group mb-3">
-                <span class="input-group-text">Id:</span>
-                <input type="text" name="id" value="<?=$pais->getId()?>" 
+                <span hidden class="input-group-text">Id:</span>
+                <input hidden type="text" name="id" value="<?=$pais->getId()?>" 
                     class="form-control">
             </div>
             <div class="input-group mb-3">

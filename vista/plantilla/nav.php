@@ -77,8 +77,8 @@
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="?ctrl=CtrlUsuario&accion=cambiarClave" 
-            class="dropdown-item dropdown-footer">Cambiar Contraseña</a>
+          <a href="?ctrl=CtrlCliente&accion=perfil" 
+            class="dropdown-item dropdown-footer">Perfil...</a>
           <a href="#" class="dropdown-item dropdown-footer">Acerca de...</a>
           <div class="dropdown-divider"></div>
           <a href="?ctrl=CtrlUsuario&accion=cerrarSesion" class="dropdown-item dropdown-footer">Cerrar Sesión</a>

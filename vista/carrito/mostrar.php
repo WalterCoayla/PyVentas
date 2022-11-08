@@ -35,7 +35,7 @@
                                 </td>
                                 <td width="20%">
                                     <h5>Precio:</h5>
-                                        <h4>S/ <?=number_format($pu, 2, ',', ' ');;?></h4> 
+                                        <h4>S/ <?=number_format($pu, 2, ',', ' ');?></h4> 
                                     <h5>Cantidad:</h5>
                                         <h4>
                                             <?=$cant;?>
@@ -102,14 +102,28 @@
                     
                 </table>
                 <hr>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        
-                        <a href="?ctrl=CtrlBoleta&accion=guardarNuevo" class="btn-lg btn-success">
-                            <i class="fa fa-cart-arrow-down"></i>
-                        Procesar Compra</a>
+                <?php if (isset($_SESSION['id'])){ ?>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            
+                            <a href="?ctrl=CtrlBoleta&accion=guardarNuevo" class="btn-lg btn-success">
+                                <i class="fa fa-cart-arrow-down"></i>
+                            Procesar Compra</a>
+                        </div>
                     </div>
-                </div>
+                <?php }else { ?>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            
+                            <button class="btn-lg btn-success" disabled>
+                                <i class="fa fa-cart-arrow-down"></i>
+                            Procesar Compra</button>
+                            <br>
+                            <code>Primero debe LOGEARSE</code>
+                        </div>
+                    </div>
+                <?php }?>
+                
                 <hr>
                 <div class="row">
                     <div class="col-md-12 text-center">

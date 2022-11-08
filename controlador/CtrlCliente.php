@@ -123,8 +123,7 @@ class CtrlCliente extends Controlador {
         
         $this->index($respuesta['msg']);
     }
-    private function _getMigas($operacion=null)
-    {
+    private function _getMigas($operacion=null)     {
         $retorno=null;
         switch ($operacion) {
             case 'nuevo':
@@ -171,15 +170,29 @@ class CtrlCliente extends Controlador {
                     $_SESSION['id']=$datos['data'][0]['idcliente'];
                     $_SESSION['dni']=$datos['data'][0]['dni'];
                 }
-            
         }
         header("Location: ?");
         exit();
     }
-    public function cerrarSesion()
-    {
+    public function cerrarSesion()     {
         session_destroy();
         header("Location: ?");
         exit();
+    }
+    public function perfil($msg=null)     {
+        $menu= Libreria::getMenu();
+        
+        $obj = new Cliente();
+        $resultado = $obj->leer();
+        $msg = ($msg==null)?$this->_getMsg():$msg;
+        $datos = array(
+            'titulo'=>"Perfil",
+            'contenido'=>Vista::mostrar('cliente/perfil.php',$resultado,true),
+            'menu'=>$menu,
+            'migas'=>$this->_getMigas(),
+            'msg'=>$msg
+        );
+        
+        $this->mostrarVista('template.php',$datos);
     }
 }

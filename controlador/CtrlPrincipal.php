@@ -33,29 +33,7 @@ class CtrlPrincipal extends Controlador {
         $this->mostrarVista('template.php',$datos);
 
     }
-    public function gracias(){
-        $menu= Libreria::getMenu();
-        $migas = array(
-            '?'=>'Inicio',
-        );
-        $datosGraf= $this->getGraficoModelosXMarcas();
-        unset($_SESSION['carrito']);
-        $datos = array(
-            'titulo'=>"Sistema de Ventas",
-            'contenido'=>Vista::mostrar('gracias.php','',true),
-            'menu'=>$menu,
-            'migas'=>$migas,
-            'msg'=>array(
-                    'titulo'=>'',
-                    'cuerpo'=>''
-            ),
-            'data'=>null,
-            'grafico'=>$datosGraf
-        );
-        
-        $this->mostrarVista('template.php',$datos);
-
-    }
+    
     private function getGraficoModelosXMarcas(){
         $g = new Graficador();
         $datos = $g->getModeloXMarca();

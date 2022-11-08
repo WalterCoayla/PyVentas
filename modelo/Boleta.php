@@ -1,6 +1,8 @@
 <?php
 require_once SYS . DIRECTORY_SEPARATOR . 'Modelo.php';
 require_once PER . DIRECTORY_SEPARATOR . "BaseDeDatos.php";
+require_once MOD . DIRECTORY_SEPARATOR . "Cliente.php";
+require_once MOD . DIRECTORY_SEPARATOR . "DetalleBoleta.php";
 
 class Boleta extends Modelo {
     private $_id;
@@ -13,10 +15,18 @@ class Boleta extends Modelo {
     private $_tabla="boletas";
     private $_bd;
 
-    public function __construct($id=null, $nombre=null){
+    public function __construct($id=null, $nro=null,$fecha=null,$total=0){
         $this->_bd = new BaseDeDatos(new MySQL());
         $this->_id = $id;
-        $this->_nombre= $nombre;
+        $this->_nro= $nro;
+        $this->_fecha= $fecha;
+        $this->_total= $total;
+    }
+    public function setCliente(Cliente $c) {
+        $this->_cliente=$c;
+    }
+    public function addDetalle(Detalle $d){
+        $this->_detalles[]=$d;
     }
     public function leer(){
         $sql ="SELECT * FROM ". $this->_tabla .";";
@@ -50,7 +60,7 @@ class Boleta extends Modelo {
     public function nuevo($total=0,$idCliente=1,$detalles=null){
         $sql = "INSERT INTO ". $this->_tabla 
             ." (total, idcliente) VALUES (".
-                $total .",". $idCliente
+                $total*1.18 .",". $idCliente
             .");";
         $this->_bd->ejecutar($sql);
 
@@ -68,5 +78,13 @@ class Boleta extends Modelo {
     }
     public function getNombre(){
         return $this->_nombre;
+    }
+    public function getUltimaBoletaDetalleCliente($id)  {
+        $sql = "SELECT * FROM `v_boletas` WHERE idboleta=idBoletaCliente(".$id.")";
+        return $this->_bd->ejecutar($sql);
+    }
+    public function getUltimaBoletaCliente($id)  {
+        $sql = "SELECT * FROM ". $this->_tabla." WHERE idboleta=idBoletaCliente(".$id.")";
+        return $this->_bd->ejecutar($sql);
     }
 }

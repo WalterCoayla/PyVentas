@@ -140,7 +140,7 @@ class CtrlPais extends Controlador {
                     break;
             }
             
-            Vista::mostrar('pais/reporteXLSX.php',$datos);
+            Vista::mostrar('pais/reporte.php',$datos);
         }
         
     }
